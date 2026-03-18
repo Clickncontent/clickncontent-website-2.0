@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Pacifico&family=Bebas+Neue&family=Caveat:wght@700&family=Righteous&family=Abril+Fatface&family=Permanent+Marker&family=Cinzel:wght@700&family=Bangers&family=Creepster&family=Dancing+Script:wght@700&family=Russo+One&family=Oswald:wght@700&family=Lobster&family=Special+Elite&display=swap');
+
+@layer base {
+  :root {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 207 82% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 207 60% 15%;
+    --accent-foreground: 207 82% 75%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 207 82% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 207 82% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 207 82% 55%;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 207 82% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 207 60% 15%;
+    --accent-foreground: 207 82% 75%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 207 82% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Glassmorphism Card */
+  .glass-card {
+    position: relative;
+    border-radius: 20px;
+    background: rgba(250, 250, 250, 0.18);
+    backdrop-filter: blur(8px) saturate(60%);
+    -webkit-backdrop-filter: blur(8px) saturate(60%);
+    border: 0px solid rgba(255, 255, 255, 0.2);
+    box-shadow: -4px 12px 20px 0 rgba(51, 51, 51, 0.22),
+      inset 0px 0px 4px 2px rgba(255, 255, 255, 0.45);
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(to left top, rgba(255,255,255,0.225) 0%, rgba(255,255,255,0) 50%);
+    z-index: 1;
+  }
+
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.135) 0%, rgba(255,255,255,0) 100%);
+    z-index: 1;
+  }
+
+  .glass-card > * {
+    position: relative;
+    z-index: 10;
+  }
+}
