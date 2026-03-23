@@ -23,6 +23,7 @@ const Index = () => {
         <HeroSection />
         <LogoCarousel />
       </div>
+      <VideoGrid />
       <ServicesOverview />
       <ProcessSection />
       <CaseResults />

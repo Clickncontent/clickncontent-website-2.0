@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Star, Sparkles } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -82,83 +82,121 @@ const Priser = () => {
 
   return (
     <Layout>
-      {/* ── Hero & Packages ─────────────────────────────────────────── */}
-      <section className="pt-24 lg:pt-36 pb-28 lg:pb-36 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="py-20 lg:py-28 bg-foreground relative overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-primary/12 rounded-full blur-[120px]" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <motion.div
-            className="max-w-3xl mx-auto text-center mb-16 lg:mb-24"
+            className="max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-4">Priser & Pakker</p>
-            <h1 className="font-display text-4xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
-              Få content <span className="text-primary">hver måned.</span>
+            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-4">Priser</p>
+            <h1 className="font-display text-4xl lg:text-6xl font-bold text-primary-foreground leading-[1.1] mb-6">
+              Få content
+              <br />
+              <span className="text-primary">hver måned.</span>
             </h1>
-            <p className="text-lg text-foreground/60 leading-relaxed max-w-xl mx-auto">
-              Vælg den rette pakke eller beregn en estimeret pris på jeres næste contentproduktion.
+            <p className="text-lg text-primary-foreground/60 leading-relaxed max-w-lg mb-10">
+              Beregn en estimeret pris på jeres næste contentproduktion.
             </p>
+            <Button asChild size="lg" className="text-base px-8 h-13 rounded-xl shadow-lg shadow-primary/25">
+              <Link to="/kontakt">
+                Book et møde
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Packages ─────────────────────────────────────── */}
+      <section className="py-28 lg:py-36">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-16 lg:mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-4">Pakker</p>
+            <h2 className="font-display text-3xl lg:text-5xl font-bold text-foreground leading-tight">
+              Vælg den rette pakke.
+            </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {packages.map((pkg, i) => (
               <motion.div
                 key={pkg.name}
                 className={cn(
-                  "w-full transition-transform duration-500",
-                  pkg.highlighted 
-                    ? "glass-card-blue scale-[1.03] shadow-2xl z-10 lg:-mx-2" 
-                    : "glass-card hover:scale-[1.02] border-none"
+                  "relative rounded-2xl border p-8 lg:p-10 flex flex-col transition-all duration-500",
+                  pkg.highlighted
+                    ? "bg-foreground text-primary-foreground border-foreground shadow-2xl shadow-foreground/20 scale-[1.03] z-10"
+                    : "bg-card border-border hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5"
                 )}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
               >
-                <div className="card-content !px-6 !py-10 lg:!px-8 lg:!py-12">
-                  {pkg.badge && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-                      <span className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        {pkg.badge}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="card-header w-full">
-                    <div className="user-info w-full text-left">
-                      <div className="avatar">
-                        <svg className="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                      </div>
-                      <div className="user-details">
-                        <p className="user-name">Pakke</p>
-                        <p className="user-role">{pkg.name}</p>
-                      </div>
-                    </div>
+                {pkg.badge && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {pkg.badge}
+                    </span>
                   </div>
+                )}
 
-                  <div className="card-body">
-                    <h3 className="card-title text-4xl mb-1">{pkg.price}</h3>
-                    <p className="card-description mb-6">DKK / {pkg.period}</p>
-                    
-                    <ul className="space-y-3 mb-8 text-left text-sm">
-                      {pkg.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2.5">
-                          <Check className="w-4 h-4 flex-shrink-0 text-primary" />
-                          <span className="opacity-90">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <h3 className={cn(
+                  "font-display text-lg font-bold mb-1",
+                  pkg.highlighted ? "text-primary-foreground" : "text-foreground"
+                )}>
+                  {pkg.name}
+                </h3>
 
-                    <button className="glass-button w-full mt-auto mb-2 text-sm h-12">
-                      <Link to="/kontakt" className="w-full block">Vælg pakke</Link>
-                    </button>
-                  </div>
+                <div className="mb-6">
+                  <span className={cn(
+                    "font-display text-4xl font-bold",
+                    pkg.highlighted ? "text-primary-foreground" : "text-foreground"
+                  )}>
+                    {pkg.price}
+                  </span>
+                  <span className={cn(
+                    "text-sm ml-1",
+                    pkg.highlighted ? "text-primary-foreground/50" : "text-muted-foreground"
+                  )}>
+                    DKK / {pkg.period}
+                  </span>
                 </div>
+
+                <ul className="space-y-3 mb-8 flex-1">
+                  {pkg.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2.5 text-sm">
+                      <Check className={cn(
+                        "w-4 h-4 flex-shrink-0",
+                        pkg.highlighted ? "text-primary" : "text-primary"
+                      )} />
+                      <span className={pkg.highlighted ? "text-primary-foreground/80" : "text-muted-foreground"}>
+                        {f}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  asChild
+                  size="lg"
+                  variant={pkg.highlighted ? "default" : "outline"}
+                  className={cn(
+                    "w-full rounded-xl h-12 text-base",
+                    pkg.highlighted && "shadow-lg shadow-primary/25"
+                  )}
+                >
+                  <Link to="/kontakt">Vælg pakke</Link>
+                </Button>
               </motion.div>
             ))}
           </div>
@@ -277,7 +315,7 @@ const Priser = () => {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 relative overflow-hidden">
+      <section className="py-28 lg:py-36 bg-foreground relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px]" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <motion.div
@@ -286,12 +324,12 @@ const Priser = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl lg:text-5xl font-bold text-foreground leading-[1.1] mb-6">
+            <h2 className="font-display text-3xl lg:text-5xl font-bold text-primary-foreground leading-[1.1] mb-6">
               Klar til at skalere jeres
               <br />
               <span className="text-primary">paid social creatives?</span>
             </h2>
-            <p className="text-foreground/60 text-lg mb-10 max-w-md mx-auto leading-relaxed">
+            <p className="text-primary-foreground/50 text-lg mb-10 max-w-md mx-auto leading-relaxed">
               Lad os tage en uforpligtende snak om jeres behov og budget.
             </p>
             <Button asChild size="lg" className="text-base px-10 h-13 rounded-xl shadow-lg shadow-primary/25">

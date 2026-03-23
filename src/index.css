@@ -97,13 +97,13 @@
   .glass-card {
     position: relative;
     border-radius: 20px;
-    background: rgba(250, 250, 250, 0.18);
-    backdrop-filter: blur(8px) saturate(60%);
-    -webkit-backdrop-filter: blur(8px) saturate(60%);
-    border: 0px solid rgba(255, 255, 255, 0.2);
-    box-shadow: -4px 12px 20px 0 rgba(51, 51, 51, 0.22),
-      inset 0px 0px 4px 2px rgba(255, 255, 255, 0.45);
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(35px) saturate(40%);
+    -webkit-backdrop-filter: blur(35px) saturate(40%);
+    border: 6px solid rgba(240, 240, 240, 0.2);
+    box-shadow: 4px 4px 12px 0 rgba(136, 136, 136, 0.18),
+      inset 0 0 120px rgba(255, 255, 255, 0.25),
+      inset 0px 0px 4px 2px rgba(255, 255, 255, 0.5);
   }
 
   .glass-card::before {
@@ -115,7 +115,8 @@
     height: 100%;
     pointer-events: none;
     border-radius: inherit;
-    background: linear-gradient(to left top, rgba(255,255,255,0.225) 0%, rgba(255,255,255,0) 50%);
+    /* angled edge reflection */
+    background: linear-gradient(to left top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%);
     z-index: 1;
   }
 
@@ -128,11 +129,198 @@
     height: 100%;
     pointer-events: none;
     border-radius: inherit;
+    /* subtle top-to-bottom sheen */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+    z-index: 1;
+  }
+
+  /* Glassmorphism Card Video variant */
+  .glass-card-video {
+    position: relative;
+    border-radius: 20px;
+    background: rgba(40, 115, 184, 0.38); /* Blue Variant */
+    backdrop-filter: blur(35px) saturate(166%);
+    -webkit-backdrop-filter: blur(35px) saturate(166%);
+    border: 6px solid rgba(240, 240, 240, 0.2);
+    box-shadow: 4px 4px 12px 0 rgba(136, 136, 136, 0.18),
+      inset 0 0 120px rgba(255, 255, 255, 0.25),
+      inset 0px 0px 4px 2px rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+  }
+
+  .glass-card-video::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; border-radius: inherit;
+    background: linear-gradient(to left top, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 50%); z-index: 1;
+  }
+  .glass-card-video::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; border-radius: inherit;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%); z-index: 1;
+  }
+
+  .glass-card > *, .glass-card-video > * {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Content styling */
+  .card-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-icon {
+    width: 20px;
+    height: 20px;
+    color: #3b82f6;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-name {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .user-role {
+    font-size: 12px;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .notification-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+  }
+
+  .card-body {
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+
+  .card-description {
+    font-size: 14px;
+    opacity: 0.7;
+    margin: 0 0 16px 0;
+  }
+
+  .glass-button {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  }
+
+  .card-tip {
+    font-size: 12px;
+    text-align: center;
+    color: #e0e6ed;
+    margin: 16px 0 0 0;
+  }
+
+  /* Glassmorphism Card (Blue Variant) */
+  .glass-card-blue {
+    position: relative;
+    border-radius: 20px;
+    background: rgba(34, 61, 103, 0.34);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    box-shadow: 0px 12px 40px 0 rgba(2, 6, 23, 0.3),
+      inset 0 0 120px rgba(79, 70, 229, 0.08),
+      inset 0px 0px 4px 2px rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(to left top, rgba(255,255,255,0.225) 0%, rgba(255,255,255,0) 50%);
+    z-index: 1;
+  }
+
+  .glass-card-blue::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
     background: linear-gradient(to bottom, rgba(255,255,255,0.135) 0%, rgba(255,255,255,0) 100%);
     z-index: 1;
   }
 
-  .glass-card > * {
+  .glass-card-blue > * {
     position: relative;
     z-index: 10;
   }
