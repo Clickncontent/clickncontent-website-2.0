@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const videos = [
   { id: 1, title: "HF2 story", platform: "Meta", src: "/HF2 story.MP4" },
@@ -13,7 +13,27 @@ const videos = [
 
 const VideoCard = ({ video, index }: { video: any, index: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsIntersecting(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // Trigger loading slightly before it enters the viewport
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleVideo = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -39,15 +59,21 @@ const VideoCard = ({ video, index }: { video: any, index: number }) => {
       <div className="glass-card-video w-full aspect-[9/16] transition-transform duration-500 hover:-translate-y-1 hover:shadow-2xl relative flex items-center justify-center flex-col overflow-hidden mb-4">
         
         {/* Background Native Video Component */}
-        <div className="absolute inset-0 w-full h-full z-10 pointer-events-auto rounded-[14px] overflow-hidden" onClick={toggleVideo}>
-          <video
-            ref={videoRef}
-            src={`${video.src}#t=0.5`}
-            loop
-            muted={false}
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        <div 
+          ref={containerRef}
+          className="absolute inset-0 w-full h-full z-10 pointer-events-auto rounded-[14px] overflow-hidden" 
+          onClick={toggleVideo}
+        >
+          {isIntersecting && (
+            <video
+              ref={videoRef}
+              src={`${video.src}#t=0.5`}
+              loop
+              muted={false}
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
         </div>
 
         {/* Overlay layer handles thumbnail and play button native recreation */}

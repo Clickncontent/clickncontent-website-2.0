@@ -177,6 +177,7 @@ const HeroSection = () => {
                 <video 
                   ref={smallVideoRef}
                   src="/Nadia Nadim.mp4" 
+                  preload="none"
                   loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />
