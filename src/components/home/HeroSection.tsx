@@ -149,8 +149,8 @@ const HeroSection = () => {
               >
                 <video 
                   ref={mainVideoRef}
-                  src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" 
-                  autoPlay loop muted playsInline 
+                  src="/Transformer story.mp4" 
+                  autoPlay loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
                 
@@ -176,8 +176,8 @@ const HeroSection = () => {
               >
                 <video 
                   ref={smallVideoRef}
-                  src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" 
-                  loop muted playsInline 
+                  src="/Nadia Nadim.mp4" 
+                  loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />
                 

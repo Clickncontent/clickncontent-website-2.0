@@ -114,7 +114,7 @@ const Ydelser = () => {
               >
                 <video 
                   ref={videoRef}
-                  src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" 
+                  src="/Balvid.mp4" 
                   autoPlay loop muted playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />

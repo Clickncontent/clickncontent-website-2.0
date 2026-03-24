@@ -1,42 +1,31 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
-import { useState } from "react";
-import YouTube, { YouTubeProps } from "react-youtube";
+import { useRef, useState } from "react";
 
 const videos = [
-  { id: 1, title: "Fashion Brand – UGC", platform: "Meta", youtubeId: "08npwcMB_EE" },
-  { id: 2, title: "Fitness – Testimonial", platform: "Instagram", youtubeId: "8Fd7QWYOVJA" },
-  { id: 3, title: "SaaS – Product Demo", platform: "TikTok", youtubeId: "8ZNGLYft7_w" },
-  { id: 4, title: "E-com – Unboxing", platform: "Meta", youtubeId: "Lgps-K2vRXI" },
-  { id: 5, title: "Startup – Founder", platform: "Instagram", youtubeId: "cjQIrYl1L0k" },
-  { id: 6, title: "DTC – Before/After", platform: "TikTok", youtubeId: "cjjTxWYkk3g" },
+  { id: 1, title: "HF2 story", platform: "Meta", src: "/HF2 story.MP4" },
+  { id: 2, title: "Interview story", platform: "Instagram", src: "/Interview story.mp4" },
+  { id: 3, title: "Nadia Nadim", platform: "TikTok", src: "/Nadia Nadim.mp4" },
+  { id: 4, title: "Nygth Januar", platform: "Meta", src: "/Nygth Januar.mp4" },
+  { id: 5, title: "Video #1", platform: "Instagram", src: "/Video_1.mp4" },
+  { id: 6, title: "Yuki video", platform: "TikTok", src: "/Yuki video.mp4" },
 ];
 
 const VideoCard = ({ video, index }: { video: any, index: number }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
-  const [player, setPlayer] = useState<any>(null);
 
-  const handlePlayClick = (e: React.MouseEvent) => {
+  const toggleVideo = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsPlaying(true);
-    if (!hasStarted) {
-      setHasStarted(true);
-    } else if (player) {
-      player.playVideo();
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
     }
-  };
-
-  const onReady: YouTubeProps['onReady'] = (event) => {
-    setPlayer(event.target);
-  };
-
-  const onPause: YouTubeProps['onPause'] = () => {
-    setIsPlaying(false);
-  };
-
-  const onPlay: YouTubeProps['onPlay'] = () => {
-    setIsPlaying(true);
   };
 
   return (
@@ -49,39 +38,26 @@ const VideoCard = ({ video, index }: { video: any, index: number }) => {
     >
       <div className="glass-card-video w-full aspect-[9/16] transition-transform duration-500 hover:-translate-y-1 hover:shadow-2xl relative flex items-center justify-center flex-col overflow-hidden mb-4">
         
-        {/* Background YouTube Component (only mounts after first play) */}
-        {hasStarted && (
-          <div className="absolute inset-0 w-full h-full z-10 pointer-events-auto rounded-[14px] overflow-hidden">
-            <YouTube
-              videoId={video.youtubeId}
-              opts={{ 
-                width: '100%', 
-                height: '100%', 
-                playerVars: { autoplay: 1, mute: 0, modestbranding: 1, rel: 0, controls: 1 } 
-              }}
-              onReady={onReady}
-              onPause={onPause}
-              onPlay={onPlay}
-              className="absolute inset-0 w-full h-full"
-              iframeClassName="w-full h-full border-0 absolute top-0 left-0"
-            />
-          </div>
-        )}
+        {/* Background Native Video Component */}
+        <div className="absolute inset-0 w-full h-full z-10 pointer-events-auto rounded-[14px] overflow-hidden" onClick={toggleVideo}>
+          <video
+            ref={videoRef}
+            src={`${video.src}#t=0.5`}
+            loop
+            muted={false}
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
 
-        {/* Overlay layer handles thumbnail and play button */}
+        {/* Overlay layer handles thumbnail and play button native recreation */}
         {!isPlaying && (
           <div 
-            className="absolute inset-0 z-20 flex flex-col items-center justify-center w-full h-full overflow-hidden rounded-[14px] cursor-pointer pointer-events-auto"
-            onClick={handlePlayClick}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center w-full h-full overflow-hidden rounded-[14px] cursor-pointer pointer-events-none"
           >
-            <img 
-              src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`} 
-              alt={video.title} 
-              className="absolute inset-0 w-full h-full object-cover blur-[2px] opacity-70 group-hover:opacity-100 group-hover:blur-0 transition-all duration-700 pointer-events-none"
-            />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 backdrop-blur-[2px]" />
             
-            <div className="relative z-30 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+            <div className="relative z-30 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
               <Play className="w-5 h-5 text-white fill-white ml-0.5" />
             </div>
           </div>
@@ -116,7 +92,6 @@ const VideoGrid = () => {
           </h2>
         </motion.div>
 
-        {/* Grid layout perfectly supporting 6 vertical video cards in a row natively */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-5">
           {videos.map((video, i) => (
             <VideoCard key={video.id} video={video} index={i} />
