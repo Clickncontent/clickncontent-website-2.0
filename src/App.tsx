@@ -11,6 +11,7 @@ import OmOs from "./pages/OmOs";
 import Kontakt from "./pages/Kontakt";
 import NotFound from "./pages/NotFound";
 import CookieBanner from "./components/CookieBanner";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/ydelser" element={<Ydelser />} />
