@@ -4,7 +4,6 @@ import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-import cameraImg from "@/assets/camera.png";
 
 const HeroSection = () => {
   const mainVideoRef = useRef<HTMLVideoElement>(null);
@@ -194,11 +193,12 @@ const HeroSection = () => {
 
               {/* Floating metric badge */}
               <motion.div
-                className="absolute -right-4 top-12 bg-card rounded-xl p-2 shadow-xl border border-border overflow-hidden"
+                className="absolute -right-4 top-12 bg-card rounded-xl p-3 shadow-xl border border-border"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
               >
-                <img src={cameraImg} alt="Camera" className="w-16 h-16 object-contain" />
+                <p className="font-display text-lg font-bold text-primary">+120%</p>
+                <p className="text-xs text-muted-foreground">CTR stigning</p>
               </motion.div>
 
               {/* Floating metric badge bottom */}
