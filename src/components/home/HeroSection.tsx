@@ -4,6 +4,9 @@ import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import cameraImg from "@/assets/camera.png";
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 const HeroSection = () => {
   const mainVideoRef = useRef<HTMLVideoElement>(null);
