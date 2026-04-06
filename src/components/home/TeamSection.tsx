@@ -17,12 +17,12 @@ interface TeamMember {
 
 const team: TeamMember[] = [
   {
-    name: "Bartozs Otreba",
+    name: "Bartosz Otreba",
     role: "Co-Founder & head of sales",
     initials: "BO",
     image: bartoszImg,
     description:
-      "Bartozs driver salg og partnerskaber hos ClicknContent. Med sin energi og passion for performance marketing sørger han for, at vi altid matcher de rigtige brands med de rigtige løsninger.",
+      "Bartosz driver salg og partnerskaber hos ClicknContent. Med sin energi og passion for performance marketing sørger han for, at vi altid matcher de rigtige brands med de rigtige løsninger.",
   },
   {
     name: "Kasper Olander Linder",

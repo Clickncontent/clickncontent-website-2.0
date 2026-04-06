@@ -26,7 +26,7 @@ const FinalCTA = () => {
             din performance?
           </h2>
           <p className="text-primary-foreground/50 text-lg mb-10 leading-relaxed max-w-md mx-auto">
-            Lad os tage en uforpligtende snak om, hvordan vi kan skabe creatives der leverer.
+            Lad os tage en uforpligtende snak om, hvordan vi kan blive jeres kreative motor.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CalendlyButton size="lg" className="text-base px-10 h-13 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow">

@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
 
 const services = [
-  { icon: Lightbulb, title: "Kreativ Strategi", description: "Vi analyserer målgruppe og konkurrenter for at udvikle en datadrevet kreativ retning." },
-  { icon: Video, title: "Videoproduktion", description: "Professionelle videoer i alle formater – fra rå UGC til polerede brand-videoer." },
-  { icon: FlaskConical, title: "Creative Testing", description: "Systematisk test af hooks, angles og formater for at finde de vindende creatives." },
-  { icon: BarChart3, title: "Performance Analyse", description: "Dyb analyse af creative data der driver løbende optimering og bedre resultater." },
+  { icon: Lightbulb, title: "Kreativ Strategi", description: "Vi researchar jeres marked, målgruppe og konkurrenter og bygger en kreativ retning, der er designet til at performe i ads." },
+  { icon: Video, title: "Videoproduktion", description: "Vi producerer video i volume. Fra rå UGC-stil til poleret brand content, alt skræddersyet til feed og annoncer." },
+  { icon: FlaskConical, title: "Creative Testing", description: "Vi tester hooks, angles og formater systematisk, så budgettet går til de creatives der faktisk konverterer." },
+  { icon: BarChart3, title: "Performance Analyse", description: "Vi analyserer hook rate, hold rate og konverteringsdata og omsætter det til konkrete ændringer i næste runde creatives." },
 ];
 
 const ServicesOverview = () => {
@@ -36,7 +36,7 @@ const ServicesOverview = () => {
             </div>
             <div className="max-w-md w-full">
               <p className="text-primary-foreground/60 text-lg leading-relaxed mb-6">
-                Fra strategi til analyse – vi håndterer hele den kreative proces, så du kan fokusere på vækst.
+                Vi dækker hele kæden fra kreativ strategi til performancedata, så du ikke skal koordinere mellem bureau, videograf og mediekøber.
               </p>
               <Button asChild variant="outline" className="rounded-xl group border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:border-primary">
                 <Link to="/ydelser">

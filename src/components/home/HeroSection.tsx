@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
-import { ArrowRight, Play, CheckCircle } from "lucide-react";
+import { ArrowRight, Play, Star, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
@@ -10,6 +10,7 @@ const HeroSection = () => {
   const smallVideoRef = useRef<HTMLVideoElement>(null);
   const [isMainPlaying, setIsMainPlaying] = useState(true);
   const [isSmallPlaying, setIsSmallPlaying] = useState(false);
+  const [isMainMuted, setIsMainMuted] = useState(true);
 
   const toggleMainVideo = () => {
     if (mainVideoRef.current) {
@@ -36,7 +37,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 lg:pt-24 pb-16">
+    <section className="relative min-h-screen flex items-center pt-20 lg:pt-[104px] pb-16">
       {/* Ambient glow effects spilling seamlessly into adjacent sections without rigid container bounds */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px]" />
@@ -56,7 +57,7 @@ const HeroSection = () => {
             >
               <div className="flex -space-x-1">
                 {[...Array(5)].map((_, i) => (
-                  <CheckCircle key={i} className="w-3.5 h-3.5 text-primary fill-primary" />
+                  <Star key={i} className="w-3.5 h-3.5 text-primary fill-primary" />
                 ))}
               </div>
               <span className="text-primary-foreground/50 text-sm font-medium tracking-wide uppercase">
@@ -96,7 +97,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
             >
-              Vi udvikler strategi, skriver scripts, producerer og optimerer videoannoncer, der driver performance på Meta og TikTok.
+              Vi er jeres eksterne marketingafdeling — med speciale i video og betalte annoncer.
             </motion.p>
 
             <motion.div
@@ -123,7 +124,7 @@ const HeroSection = () => {
             >
               {[
                 { value: "200+", label: "Creatives leveret" },
-                { value: "4.2x", label: "Gns. ROAS" },
+                { value: "6.2x", label: "Gns. ROI" },
                 { value: "40+", label: "Glade kunder" },
               ].map((stat) => (
                 <div key={stat.label}>
@@ -150,9 +151,31 @@ const HeroSection = () => {
                 <video 
                   ref={mainVideoRef}
                   src="/Transformer story.mp4" 
-                  autoPlay loop playsInline 
+                  autoPlay muted={isMainMuted} loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (mainVideoRef.current) {
+                      mainVideoRef.current.muted = !isMainMuted;
+                      setIsMainMuted(!isMainMuted);
+                      if (!isMainPlaying) {
+                        mainVideoRef.current.play();
+                        setIsMainPlaying(true);
+                      }
+                    }
+                  }}
+                  className="absolute top-3 right-3 z-30 p-2 rounded-full bg-background/30 backdrop-blur-md border border-white/10 hover:bg-background/50 transition-colors"
+                  aria-label="Toggle mute"
+                >
+                  {isMainMuted ? (
+                    <VolumeX className="w-4 h-4 text-primary-foreground" />
+                  ) : (
+                    <Volume2 className="w-4 h-4 text-primary-foreground" />
+                  )}
+                </button>
                 
                 {!isMainPlaying && (
                   <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm transition-all duration-300 z-20">
@@ -163,7 +186,7 @@ const HeroSection = () => {
                 )}
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/80 to-transparent">
                   <p className="text-sm font-medium text-primary-foreground">UGC Campaign</p>
-                  <p className="text-xs text-primary-foreground/60">Meta · 4.2x ROAS</p>
+                  <p className="text-xs text-primary-foreground/60">Meta · 6.2x ROI</p>
                 </div>
               </div>
 
@@ -177,7 +200,7 @@ const HeroSection = () => {
                 <video 
                   ref={smallVideoRef}
                   src="/Nadia Nadim.mp4" 
-                  preload="none"
+                  preload="auto"
                   loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />
@@ -193,12 +216,12 @@ const HeroSection = () => {
 
               {/* Floating metric badge */}
               <motion.div
-                className="absolute -right-4 top-12 bg-card rounded-xl p-3 shadow-xl border border-border"
+                className="absolute right-0 lg:right-4 z-20 top-16 bg-card rounded-xl p-3 shadow-xl border border-border"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
               >
-                <p className="font-display text-lg font-bold text-primary">+120%</p>
-                <p className="text-xs text-muted-foreground">CTR stigning</p>
+                <p className="font-display text-base font-bold text-primary">End-to-end</p>
+                <p className="text-xs text-muted-foreground">Produktion</p>
               </motion.div>
 
               {/* Floating metric badge bottom */}

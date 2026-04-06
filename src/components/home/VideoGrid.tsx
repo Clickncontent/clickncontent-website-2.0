@@ -3,12 +3,12 @@ import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const videos = [
-  { id: 1, title: "HF2 story", platform: "Meta", src: "/HF2 story.MP4" },
-  { id: 2, title: "Interview story", platform: "Instagram", src: "/Interview story.mp4" },
+  { id: 1, title: "Hurtig Flyt", platform: "Meta", src: "/SS 6 Story.mp4" },
+  { id: 2, title: "Skønhedsklinik Aarhus", platform: "Instagram", src: "/Hvad koster en studentervogn.mp4" },
   { id: 3, title: "Nadia Nadim", platform: "TikTok", src: "/Nadia Nadim.mp4" },
-  { id: 4, title: "Nygth Januar", platform: "Meta", src: "/Nygth Januar.mp4" },
-  { id: 5, title: "Video #1", platform: "Instagram", src: "/Video_1.mp4" },
-  { id: 6, title: "Yuki video", platform: "TikTok", src: "/Yuki video.mp4" },
+  { id: 4, title: "Nygth", platform: "Meta", src: "/Nygth Januar.mp4" },
+  { id: 5, title: "Gainer Hair", platform: "Instagram", src: "/Video_1.mp4" },
+  { id: 6, title: "Yuki", platform: "TikTok", src: "/Yuki video.mp4" },
 ];
 
 const VideoCard = ({ video, index }: { video: any, index: number }) => {

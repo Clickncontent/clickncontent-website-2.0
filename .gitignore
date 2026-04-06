@@ -23,3 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Large video files — host via Supabase/CDN (over GitHub's 100MB limit)
+public/AJR\ testimonial.mp4
+public/Lumant\ testimonial.MP4
+public/Skonhedsklinik\ thumbnail.mp4
+

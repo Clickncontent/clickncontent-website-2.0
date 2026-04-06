@@ -34,7 +34,7 @@ const LogoCarousel = () => {
 
     let animationId: number;
     let position = 0;
-    const speed = 0.5; // px per frame
+    const speed = 1.2; // px per frame
 
     const step = () => {
       if (!isPaused) {
@@ -57,16 +57,7 @@ const LogoCarousel = () => {
   const allLogos = [...logos, ...logos];
 
   return (
-    <section className="py-24 relative z-10">
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">
-          Virksomheder vi har arbejdet med
-        </h2>
-        <p className="text-white/60 max-w-xl mx-auto">
-          Vi hjælper ambitiøse brands med at skabe content der performer på paid social.
-        </p>
-      </div>
-
+    <section className="pt-8 pb-12 relative z-10">
       <div
         className="overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}

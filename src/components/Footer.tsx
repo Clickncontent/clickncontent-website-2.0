@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, ArrowRight, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { CalendlyButton } from "@/components/CalendlyButton";
+import logo from "@/assets/clickncontent_logo.png";
 
 const Footer = () => {
   return (
@@ -12,9 +14,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <h3 className="font-display text-2xl font-bold mb-4">
-              Click<span className="text-primary">n</span>Content
-            </h3>
+            <Link to="/">
+              <img src={logo} alt="ClicknContent" className="h-8 w-auto mb-4" />
+            </Link>
             <p className="text-sm text-foreground/50 leading-relaxed max-w-xs mb-6">
               Vi skaber højtydende video creatives til paid social, der skalerer din performance på Meta og TikTok.
             </p>
@@ -32,18 +34,13 @@ const Footer = () => {
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
-            <button
-              onClick={() => {
-                const url = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/clickncontent';
-                // @ts-ignore
-                if (window.Calendly) window.Calendly.initPopupWidget({ url });
-                else window.open(url, '_blank');
-              }}
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
+            <CalendlyButton
+              variant="link"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors p-0 h-auto"
             >
               Book et møde
               <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            </CalendlyButton>
           </div>
 
           {/* Navigation */}
@@ -70,9 +67,9 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h4 className="text-[11px] font-semibold tracking-widest uppercase text-foreground/30 mb-5">Ydelser</h4>
             <ul className="space-y-3 text-sm text-foreground/50">
-              <li>Video & fotoproduktion</li>
-              <li>SoMe & annonce content</li>
-              <li>Annoncering & betalt trafik</li>
+              <li><Link to="/ydelser" className="hover:text-primary transition-colors">Video & fotoproduktion</Link></li>
+              <li><Link to="/ydelser" className="hover:text-primary transition-colors">SoMe & annonce content</Link></li>
+              <li><Link to="/ydelser" className="hover:text-primary transition-colors">Annoncering & betalt trafik</Link></li>
             </ul>
           </div>
 
@@ -82,15 +79,15 @@ const Footer = () => {
             <ul className="space-y-3 text-sm text-foreground/50">
               <li className="flex items-center gap-2.5">
                 <Mail className="w-3.5 h-3.5 text-primary/70" />
-                kontakt@clickncontent.dk
+                <a href="mailto:kontakt@clickncontent.dk" className="hover:text-primary transition-colors">kontakt@clickncontent.dk</a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-3.5 h-3.5 text-primary/70" />
-                +45 50 12 92 06
+                <a href="tel:+4550129206" className="hover:text-primary transition-colors">+45 50 12 92 06</a>
               </li>
               <li className="flex items-center gap-2.5">
                 <MapPin className="w-3.5 h-3.5 text-primary/70" />
-                Skovvejen 1, 1. sal, Aarhus C, 8000
+                <a href="https://maps.google.com/?q=Skovvejen+1,+8000+Aarhus" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Skovvejen 1, 1. sal, Aarhus C, 8000</a>
               </li>
             </ul>
           </div>

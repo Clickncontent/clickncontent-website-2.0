@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Eye, Users, TrendingUp, Play, BarChart3, Zap, Calendar, CircleDollarSign, Target, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Eye, Users, TrendingUp, Play, Pause, BarChart3, Zap, Calendar, CircleDollarSign, Target, CheckCircle2, Video } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
 
@@ -20,6 +21,7 @@ const cases = [
     client: "Lumant",
     industry: "B2B / Leads",
     description: "3x flere leads — lukkeraten på møder steg fra 25% til 50%",
+    video: "/Lumant testimonial.MP4",
     image: "from-accent via-primary/15 to-foreground/5",
     metrics: [
       { icon: Users, value: "3x", label: "Leads" },
@@ -28,17 +30,67 @@ const cases = [
     ],
   },
   {
-    client: "Ecohus",
-    industry: "Bolig & Ejendom",
-    description: "68x ROI med videoer og datadrevne Meta-kampagner",
+    client: "Hejslet Begravelsesforretning",
+    industry: "Begravelse",
+    description: "Højt engagement og markant stigning i kundehenvendelser via kreative videoer.",
+    video: null,
     image: "from-primary/20 via-accent to-foreground/5",
     metrics: [
-      { icon: TrendingUp, value: "68x", label: "ROI" },
-      { icon: BarChart3, value: "Meta", label: "Platform" },
-      { icon: CheckCircle2, value: "✓", label: "Video" },
+      { icon: Video, value: "15", label: "Videoer" },
+      { icon: Zap, value: "Højt", label: "Engagement" },
+      { icon: Users, value: "Fuld", label: "Kapacitet" },
     ],
   },
 ];
+
+const VideoCard = ({ src, industry }: { src: string; industry: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggle = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  return (
+    <div className="relative aspect-video overflow-hidden bg-black">
+      <video
+        ref={videoRef}
+        src={src}
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div
+        className="absolute inset-0 z-10 flex items-center justify-center cursor-pointer group/vid"
+        onClick={toggle}
+      >
+        {!isPlaying && <div className="absolute inset-0 bg-black/30" />}
+        <div className={`relative z-10 w-14 h-14 rounded-full backdrop-blur-md flex items-center justify-center border transition-all duration-300 ${
+          isPlaying
+            ? "bg-black/0 border-white/0 opacity-0 group-hover/vid:opacity-100 group-hover/vid:bg-black/40 group-hover/vid:border-white/30"
+            : "bg-primary-foreground/15 border-primary-foreground/30 hover:bg-primary/30 hover:border-primary/50"
+        }`}>
+          {isPlaying
+            ? <Pause className="w-5 h-5 text-white fill-white" />
+            : <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+          }
+        </div>
+      </div>
+      <div className="absolute top-4 left-4 z-20">
+        <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
+          {industry}
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const CaseResults = () => {
   return (
@@ -73,30 +125,32 @@ const CaseResults = () => {
           {cases.map((c, i) => (
             <motion.div
               key={c.client}
-              className="glass-card group transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10"
+              className={`glass-card overflow-hidden group transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10 ${
+                c.client === "Lumant" ? "border-primary/40 bg-primary/5 shadow-lg shadow-primary/10" : ""
+              }`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.5 }}
             >
               {/* Video preview area */}
-              <div className={`relative aspect-[4/3] bg-gradient-to-b ${c.image} overflow-hidden`}>
-                <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
-
-                {/* Play button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center border border-primary-foreground/20 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-500">
-                    <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground ml-0.5 group-hover:text-primary group-hover:fill-primary transition-colors duration-500" />
+              {c.video ? (
+                <VideoCard src={c.video} industry={c.industry} />
+              ) : (
+                <div className={`relative aspect-video bg-gradient-to-b ${c.image} overflow-hidden`}>
+                  <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center border border-primary-foreground/20 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-500">
+                      <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground ml-0.5 group-hover:text-primary group-hover:fill-primary transition-colors duration-500" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
+                      {c.industry}
+                    </span>
                   </div>
                 </div>
-
-                {/* Industry tag */}
-                <div className="absolute top-4 left-4">
-                  <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
-                    {c.industry}
-                  </span>
-                </div>
-              </div>
+              )}
 
               {/* Content */}
               <div className="p-6">

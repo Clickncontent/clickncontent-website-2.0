@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Target, Heart, Zap, Users } from "lucide-react";
@@ -6,37 +7,35 @@ import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight } from "lucide-react";
 import TeamSection from "@/components/home/TeamSection";
+import BehindTheScenes from "@/components/home/BehindTheScenes";
 import { Highlight } from "@/components/Highlight";
 
 const values = [
   { icon: Target, title: "Resultatdrevet", description: "Alt vi laver måles på performance. Vi optimerer for resultater, ikke likes." },
-  { icon: Heart, title: "Kreativ passion", description: "Vi brænder for at skabe indhold, der skiller sig ud i feedet." },
-  { icon: Zap, title: "Hurtig eksekvering", description: "Fra idé til færdigt creative – vi leverer hurtigt uden at gå på kompromis." },
+  { icon: Heart, title: "Kreativ passion", description: "Vi nørder kreativt håndværk. Fordi det er forskellen på en video folk scroller forbi og en der stopper dem." },
+  { icon: Zap, title: "Hurtig eksekvering", description: "Fra idé til færdigt creative på dage, ikke uger. Tempo er en del af vores DNA." },
   { icon: Users, title: "Ægte partnerskab", description: "Vi ser os selv som en forlængelse af dit team, ikke en leverandør." },
 ];
 
 const OmOs = () => {
   return (
     <Layout>
-      <section className="py-20 lg:py-28 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            className="max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="font-display text-4xl lg:text-6xl font-bold text-foreground mb-6">
-              Om <Highlight delay={0.2} className="text-primary-foreground">ClicknContent</Highlight>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Vi er et kreativt bureau med én mission: at skabe video creatives, der performer på paid social. Vi kombinerer kreativitet med data for at levere annoncer, der skalerer.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Helmet>
+        <title>Om ClicknContent — Performance Creative Bureau Aarhus</title>
+        <meta name="description" content="Mød teamet bag ClicknContent. Tre specialister i video, Meta Ads og content strategi baseret i Aarhus." />
+        <meta property="og:title" content="Om ClicknContent — Performance Creative Bureau Aarhus" />
+        <meta property="og:description" content="Mød teamet bag ClicknContent. Tre specialister i video, Meta Ads og content strategi baseret i Aarhus." />
+      </Helmet>
+      {/* Behind the scenes */}
+      <div className="pt-28 lg:pt-36">
+        <BehindTheScenes />
+      </div>
+
+      {/* Team */}
+      <TeamSection />
 
       {/* Values */}
-      <section className="py-20 lg:py-28">
+      <section className="pb-16 lg:pb-20">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.h2
             className="font-display text-3xl lg:text-4xl font-bold text-foreground mb-12 text-center"
@@ -66,9 +65,6 @@ const OmOs = () => {
           </div>
         </div>
       </section>
-
-      {/* Team */}
-      <TeamSection />
 
       {/* CTA */}
       <section className="pt-32 pb-24 lg:pt-40 lg:pb-32">

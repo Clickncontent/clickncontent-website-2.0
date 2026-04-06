@@ -1,13 +1,51 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-const faqs = [
-  { question: "Hvilke typer videoer producerer I?", answer: "Vi producerer alt fra UGC og lo-fi content til high-end brandvideoer. Altid optimeret til paid social performance." },
-  { question: "Hvad koster det?", answer: "Hver kunde er unik. Prisen afhænger fuldstændigt af indholdsformatet, mængden og jeres specifikke behov. Vores priser skræddersyes ud fra ambitionsniveau og budget. Kontakt os for at få et uforpligtende tilbud." },
-  { question: "Binder jeg mig?", answer: "Nej, vi har ingen lange bindingsperioder. Tror vi ikke på resultaterne, forventer vi heller ikke I gør det." },
-  { question: "Hvor længe går der før vi kan starte?", answer: "Fra vi afholder det indledende strategi-møde, går der typisk 1 til 2 uger inden de første creatives er klar og kampagneaktiveret." },
-  { question: "Har I egne faste creators?", answer: "Ja, vi samarbejder med et stort, stærkt netværk af danske og internationale creators, så vi altid præcist kan matche dit brand med den rigtige profil." },
-  { question: "Sender I raw-filer med?", answer: "Ja, det er jeres materiale. Udover de optimerede annonce-filer får du altid adgang til alle de rå videofiler, så I kan benytte dem kvit og frit på tværs af platforme." },
+type FAQItem = {
+  question: string;
+  answer: React.ReactNode;
+};
+
+const faqs: FAQItem[] = [
+  {
+    question: "Hvad gør jer anderledes end andre bureauer?",
+    answer: "Vi er ikke et bureau der laver én video og sender en faktura. Vi fungerer som jeres eksterne content-afdeling og bygger annonce-sæt til hele funnelen. Strategi, produktion, testing og optimering samlet ét sted, så I slipper for at koordinere mellem tre leverandører.",
+  },
+  {
+    question: "Hvad mener I med \"annonce-sæt\"?",
+    answer: "Et annonce-sæt er en samlet pakke af forskellige annoncevideoer, der dækker top-, mid- og bottom-funnel. Det giver jer content til både awareness, overvejelse og konvertering, uden at I skal starte forfra hver måned.",
+  },
+  {
+    question: "Hvilke virksomheder passer I bedst til?",
+    answer: "Virksomheder der annoncerer eller vil annoncere på Meta og TikTok, og som mangler et konstant flow af videoindhold. Det kan være e-commerce, service, SaaS eller lokale brands. Vi supplerer jeres team med et fast flow af annonce-sæt.",
+  },
+  {
+    question: "Hvordan foregår sparringen undervejs?",
+    answer: "I får en fast kontaktperson og en enkel feedback-proces. Vi starter med workshop og retning, og undervejs sparrer vi på budskaber, scripts og prioritering af annonce-sættet. Efter leveringer følger vi op, så næste runde bliver endnu skarpere.",
+  },
+
+  {
+    question: "Hvor hurtigt kan I starte?",
+    answer: "Fra vi afholder det indledende strategi-møde, går der typisk 1 til 2 uger inden de første creatives er klar og kampagneaktiveret.",
+  },
+  {
+    question: "Hvad koster det at arbejde med jer?",
+    answer: (
+      <>
+        Vi arbejder ikke med standardpakker – vi skræddersyer prisen ud fra jeres behov, ambitionsniveau og indholdstyper. Det sikrer, at du hverken betaler for lidt eller for meget – men præcis det, der skal til for at opnå resultater.
+        <br /><br />
+        Vil du have et hurtigt estimat med det samme?{" "}
+        <Link
+          to="/priser#prisberegner"
+          className="inline-flex items-center gap-1 text-primary font-semibold hover:underline underline-offset-2 transition-colors"
+        >
+          Prøv vores prisberegner <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </>
+    ),
+  },
 ];
 
 const FAQSection = () => {
@@ -28,7 +66,7 @@ const FAQSection = () => {
             Få svar på de mest almindelige spørgsmål herunder. Finder du ikke det du leder efter, er du altid velkommen til at kontakte os.
           </p>
         </motion.div>
-        
+
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -54,4 +92,5 @@ const FAQSection = () => {
     </section>
   );
 };
+
 export default FAQSection;

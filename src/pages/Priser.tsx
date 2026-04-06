@@ -1,9 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState, useMemo } from "react";
+import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
@@ -63,6 +66,10 @@ const Priser = () => {
   const [organicVideos, setOrganicVideos] = useState([2]);
   const [images, setImages] = useState([0]);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [optInName, setOptInName] = useState("");
+  const [optInEmail, setOptInEmail] = useState("");
+  const [priceRevealed, setPriceRevealed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const toggleAddOn = (id: string) =>
     setSelectedAddOns((prev) =>
@@ -80,8 +87,24 @@ const Priser = () => {
     return base + extras;
   }, [adVideos, organicVideos, images, selectedAddOns]);
 
+  const handleOptIn = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!optInName.trim() || !optInEmail.trim()) return;
+    setSubmitting(true);
+    setTimeout(() => {
+      setPriceRevealed(true);
+      setSubmitting(false);
+    }, 600);
+  };
+
   return (
     <Layout>
+      <Helmet>
+        <title>Priser på content marketing pakker | ClicknContent</title>
+        <meta name="description" content="Vælg en månedlig pakke eller beregn pris på jeres næste videoproduktion. Transparente priser fra Aarhus." />
+        <meta property="og:title" content="Priser på content marketing pakker | ClicknContent" />
+        <meta property="og:description" content="Vælg en månedlig pakke eller beregn pris på jeres næste videoproduktion. Transparente priser fra Aarhus." />
+      </Helmet>
       {/* ── Hero & Packages ─────────────────────────────────────────── */}
       <section className="pt-24 lg:pt-36 pb-28 lg:pb-36 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
@@ -154,9 +177,9 @@ const Priser = () => {
                       ))}
                     </ul>
 
-                    <button className="glass-button w-full mt-auto mb-2 text-sm h-12">
-                      <Link to="/kontakt" className="w-full block">Vælg pakke</Link>
-                    </button>
+                    <CalendlyButton className="glass-button w-full mt-auto mb-2 text-sm h-12 rounded-xl">
+                      Vælg pakke
+                    </CalendlyButton>
                   </div>
                 </div>
               </motion.div>
@@ -166,7 +189,7 @@ const Priser = () => {
       </section>
 
       {/* ── Calculator ───────────────────────────────────── */}
-      <section className="py-28 lg:py-36 bg-card relative overflow-hidden">
+      <section id="prisberegner" className="py-28 lg:py-36 bg-card relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <div className="container mx-auto px-6 lg:px-8">
@@ -257,50 +280,67 @@ const Priser = () => {
               {/* Divider */}
               <div className="h-px bg-border mb-8" />
 
-              {/* Price output */}
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-2">Estimeret pris</p>
-                <motion.p
-                  className="font-display text-5xl lg:text-6xl font-bold text-primary"
-                  key={estimatedPrice}
-                  initial={{ scale: 1.05, opacity: 0.7 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
+              {/* Price gate */}
+              {!priceRevealed ? (
+                <motion.div
+                  className="rounded-2xl border border-primary/20 bg-primary/5 p-8"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                 >
-                  {formatDKK(estimatedPrice)}
-                </motion.p>
-                <p className="text-xs text-muted-foreground mt-2">Prisen er vejledende og ekskl. moms</p>
-              </div>
+                  <div className="text-center mb-6">
+                    <p className="font-display text-xl font-bold text-foreground mb-1">Se din estimerede pris nu</p>
+                    <p className="text-sm text-foreground/60">Udfyld nedenfor — du får prisen med det samme. Intet ventetid, intet tilbud, ingen forpligtelse.</p>
+                  </div>
+                  <form onSubmit={handleOptIn} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                    <Input
+                      required
+                      type="text"
+                      placeholder="Dit navn"
+                      value={optInName}
+                      onChange={(e) => setOptInName(e.target.value)}
+                      className="flex-1 h-12 bg-background border-border"
+                    />
+                    <Input
+                      required
+                      type="email"
+                      placeholder="Din email"
+                      value={optInEmail}
+                      onChange={(e) => setOptInEmail(e.target.value)}
+                      className="flex-1 h-12 bg-background border-border"
+                    />
+                    <Button
+                      type="submit"
+                      disabled={submitting}
+                      className="h-12 px-8 rounded-xl shadow-md shadow-primary/20 whitespace-nowrap"
+                    >
+                      {submitting ? "Henter..." : "Se pris"}
+                      {!submitting && <ArrowRight className="w-4 h-4 ml-1" />}
+                    </Button>
+                  </form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <p className="text-sm text-muted-foreground mb-2">Estimeret pris</p>
+                  <motion.p
+                    className="font-display text-5xl lg:text-6xl font-bold text-primary"
+                    key={estimatedPrice}
+                    initial={{ scale: 1.05, opacity: 0.7 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {formatDKK(estimatedPrice)}
+                  </motion.p>
+                  <p className="text-xs text-muted-foreground mt-2 mb-8">Prisen er vejledende og ekskl. moms</p>
+                  <p className="text-sm text-foreground/60">Vi vender tilbage til <span className="text-foreground font-medium">{optInEmail}</span> med mere info.</p>
+                </motion.div>
+              )}
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* ── CTA ──────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px]" />
-        <div className="container mx-auto px-6 lg:px-8 relative z-10">
-          <motion.div
-            className="text-center max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display text-3xl lg:text-5xl font-bold text-foreground leading-[1.1] mb-6">
-              Klar til at skalere jeres
-              <br />
-              <span className="text-primary">paid social creatives?</span>
-            </h2>
-            <p className="text-foreground/60 text-lg mb-10 max-w-md mx-auto leading-relaxed">
-              Lad os tage en uforpligtende snak om jeres behov og budget.
-            </p>
-            <Button asChild size="lg" className="text-base px-10 h-13 rounded-xl shadow-lg shadow-primary/25">
-              <Link to="/kontakt">
-                Book et kald
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
-            </Button>
-          </motion.div>
         </div>
       </section>
     </Layout>

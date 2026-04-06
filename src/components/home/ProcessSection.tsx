@@ -6,32 +6,32 @@ const steps = [
   {
     number: "01",
     title: "Strategi",
-    description: "Vi analyserer jeres målgruppe, produkt og konkurrenter for at definere den kreative retning.",
+    description: "Vi dykker ned i jeres marked, produkt og målgruppe og lægger en kreativ plan, der er bygget til at konvertere.",
     icon: Lightbulb,
   },
   {
     number: "02",
     title: "Produktion",
-    description: "Vi producerer videoer med stærke hooks, storylines og CTA'er – klar til alle platforme.",
+    description: "Vi scripter, optager og redigerer videoer med stærke hooks og klare CTA'er, klar til Meta, TikTok og LinkedIn.",
     icon: Video,
   },
   {
     number: "03",
     title: "Testing",
-    description: "Vi leverer varianter og hjælper med at identificere de vindende creatives.",
+    description: "Vi leverer varianter af hooks, angles og formater og tester systematisk, så vi finder de vindende creatives.",
     icon: FlaskConical,
   },
   {
     number: "04",
     title: "Optimering",
-    description: "Vi analyserer performance data og itererer for konstant forbedring.",
+    description: "Vi læser dataen, identificerer hvad der virker, og bruger det til at bygge næste runde endnu stærkere.",
     icon: BarChart3,
   },
 ];
 
 const ProcessSection = () => {
   return (
-    <section className="pt-32 pb-24 lg:pt-40 lg:pb-32 relative overflow-hidden">
+    <section className="pt-16 pb-24 lg:pt-20 lg:pb-32 relative overflow-hidden">
       {/* Decorative glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
@@ -66,7 +66,7 @@ const ProcessSection = () => {
               transition={{ delay: i * 0.12, duration: 0.45 }}
             >
               {/* Icon circle */}
-              <div className="group cursor-default">
+              <div className="group cursor-default flex flex-col items-center">
                 <div className="w-36 h-36 rounded-2xl bg-card/5 border border-primary-foreground/10 backdrop-blur-sm flex flex-col items-center justify-center mb-6 hover:border-primary/40 hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 transition-all duration-500">
                   <span className="font-display text-3xl font-bold text-primary/40 mb-1">{step.number}</span>
                   <step.icon className="w-7 h-7 text-primary" />

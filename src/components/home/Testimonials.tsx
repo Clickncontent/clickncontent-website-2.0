@@ -43,6 +43,36 @@ const Testimonials = () => {
           </h2>
         </motion.div>
 
+        {/* Video testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+          {[
+            { src: "/Lumant testimonial.MP4", label: "Lumant", desc: "B2B / Leads" },
+            { src: "/AJR testimonial.mp4", label: "AJR", desc: "Kunde" },
+          ].map((v, i) => (
+            <motion.div
+              key={v.label}
+              className="rounded-2xl overflow-hidden border border-primary/20 bg-card/40 shadow-lg"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="aspect-video bg-black">
+                <video
+                  src={v.src}
+                  controls
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-5">
+                <p className="font-display font-bold text-foreground">{v.label}</p>
+                <p className="text-xs text-muted-foreground">{v.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((t, i) => (
             <motion.div

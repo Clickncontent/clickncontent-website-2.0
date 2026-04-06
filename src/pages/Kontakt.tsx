@@ -7,10 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { CalendlyButton } from "@/components/CalendlyButton";
-import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -24,6 +24,7 @@ import { useState } from "react";
 const formSchema = z.object({
   name: z.string().min(1, "Navn er påkrævet").max(100),
   email: z.string().email("Ugyldig email-adresse"),
+  phone: z.string().min(8, "Telefonnummer er påkrævet"),
   company: z.string().max(100).optional(),
   message: z.string().min(10, "Beskeden skal være mindst 10 tegn").max(2000),
   consent: z.literal(true, {
@@ -32,7 +33,7 @@ const formSchema = z.object({
 });
 
 export default function Kontakt() {
-  const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,6 +41,7 @@ export default function Kontakt() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       company: "",
       message: "",
       consent: undefined,
@@ -64,18 +66,11 @@ export default function Kontakt() {
         throw new Error(data.error || "Noget gik galt. Prøv igen eller ring til os.");
       }
 
-      toast({
-        title: "Besked sendt!",
-        description: "Vi vender tilbage hurtigst muligt.",
-      });
-      form.reset();
+      // Success — redirect to confirmation page
+      navigate("/besked-modtaget");
       
     } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Fejl",
-        description: error.message || "Noget gik galt. Prøv igen eller ring til os.",
-      });
+      alert(error.message || "Noget gik galt. Prøv igen eller ring til os.");
     } finally {
       setIsSubmitting(false);
     }
@@ -83,25 +78,18 @@ export default function Kontakt() {
 
   return (
     <Layout>
-      <section className="py-20 lg:py-28 bg-card">
+      <section className="pt-28 pb-20 lg:pt-36 lg:pb-28">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
-            className="max-w-3xl"
+            className="max-w-2xl mb-14"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="font-display text-4xl lg:text-6xl font-bold text-foreground mb-6">
-              Kontakt <span className="text-primary">os</span>
+            <h1 className="font-display text-2xl lg:text-3xl font-medium text-foreground leading-relaxed mb-0">
+              Klar til at tage din paid social til næste niveau? <span className="text-primary font-bold">Book et møde</span> eller send os en besked.
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Klar til at tage din paid social til næste niveau? Book et møde eller send os en besked.
-            </p>
           </motion.div>
-        </div>
-      </section>
 
-      <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Form */}
             <motion.div
@@ -109,7 +97,8 @@ export default function Kontakt() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-display text-2xl font-bold text-foreground mb-6">Send os en besked</h2>
+              <h2 className="font-display text-2xl font-bold text-foreground mb-6">Skal vi ringe dig op?</h2>
+
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -141,6 +130,20 @@ export default function Kontakt() {
                       )}
                     />
                   </div>
+
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Telefon</FormLabel>
+                        <FormControl>
+                          <Input placeholder="+45 12 34 56 78" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   <FormField
                     control={form.control}
@@ -194,7 +197,7 @@ export default function Kontakt() {
                   <Button type="submit" size="lg" className="w-full sm:w-auto text-base px-8 h-12" disabled={isSubmitting}>
                     {isSubmitting ? "Sender..." : (
                       <>
-                        Send besked
+                        Ring os op
                         <Send className="w-4 h-4 ml-1" />
                       </>
                     )}
@@ -252,6 +255,23 @@ export default function Kontakt() {
                 <CalendlyButton variant="secondary" size="lg" className="text-base font-bold">
                   Book et kald
                 </CalendlyButton>
+              </div>
+
+              {/* Support CTA */}
+              <div className="mt-4 p-5 rounded-xl border border-border bg-card/50 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-foreground">Har du et spørgsmål?</p>
+                  <p className="text-xs text-muted-foreground">Vi svarer inden for 24 timer.</p>
+                </div>
+                <a
+                  href="mailto:kontakt@clickncontent.dk"
+                  className="flex-shrink-0 text-sm font-semibold text-primary hover:underline"
+                >
+                  Send besked →
+                </a>
               </div>
             </motion.div>
           </div>
