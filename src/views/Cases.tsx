@@ -10,7 +10,7 @@ import Testimonials from "@/components/home/Testimonials";
 import { VIDEOS, getMediaUrl } from "@/lib/supabase";
 
 // Click-to-play video for case cards
-const CaseVideoCard = ({ src, color, platform }: { src: string; color: string; platform: string }) => {
+const CaseVideoCard = ({ src, color, platform, preload = "none" }: { src: string; color: string; platform: string, preload?: "auto" | "metadata" | "none" }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -36,6 +36,7 @@ const CaseVideoCard = ({ src, color, platform }: { src: string; color: string; p
         src={src}
         loop
         playsInline
+        preload={preload}
         className="absolute inset-0 w-full h-full object-cover"
       />
       {/* Dim overlay when paused */}
@@ -250,7 +251,7 @@ const Cases = () => {
 
                   {/* 9:16 portrait video column — h-64=256px → width=144px */}
                   {c.video ? (
-                    <CaseVideoCard src={c.video} color={c.color} platform={c.platform} />
+                    <CaseVideoCard src={c.video} color={c.color} platform={c.platform} preload={i < 3 ? "auto" : "none"} />
                   ) : (
                     <div
                       className={`relative flex-shrink-0 h-full overflow-hidden bg-gradient-to-b ${c.color}`}
@@ -276,7 +277,8 @@ const Cases = () => {
                         src={c.image}
                         alt={c.client}
                         className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
+                        loading={i < 3 ? "eager" : "lazy"}
+                        fetchPriority={i < 3 ? "high" : "auto"}
                         decoding="async"
                       />
                       {/* subtle dark vignette */}
