@@ -251,7 +251,7 @@ const Cases = () => {
 
                   {/* 9:16 portrait video column — h-64=256px → width=144px */}
                   {c.video ? (
-                    <CaseVideoCard src={c.video} color={c.color} platform={c.platform} preload={i < 3 ? "auto" : "none"} />
+                    <CaseVideoCard src={c.video} color={c.color} platform={c.platform} preload={i < 3 ? "auto" : "metadata"} />
                   ) : (
                     <div
                       className={`relative flex-shrink-0 h-full overflow-hidden bg-gradient-to-b ${c.color}`}
