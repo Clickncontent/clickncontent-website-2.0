@@ -240,7 +240,7 @@ const Cases = () => {
             {cases.map((c, i) => (
               <motion.div
                 key={c.client}
-                className="group rounded-xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow"
+                className="group rounded-xl border border-border bg-card overflow-hidden flex flex-col hover:shadow-lg transition-shadow relative"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -305,27 +305,26 @@ const Cases = () => {
                 </div>
 
                 {/* Card content */}
-                <div className="p-6">
+                <Link href={`/cases/${c.slug}`} className="block p-6 flex-1 cursor-pointer group/link hover:bg-white/[0.02] transition-colors relative z-20 flex flex-col">
                   <p className="text-xs font-medium text-primary mb-1">{c.category}</p>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">{c.client}</h3>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover/link:text-primary transition-colors">{c.client}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{c.description}</p>
 
                   <div className="grid grid-cols-3 gap-2 mb-5">
                     {c.metrics.map((m) => (
-                      <div key={m.label} className="text-center p-2 rounded-lg bg-accent/50">
+                      <div key={m.label} className="text-center p-2 rounded-lg bg-accent/50 border border-transparent group-hover/link:border-primary/20 transition-all duration-300">
                         <p className="font-display text-lg font-bold text-primary">{m.value}</p>
                         <p className="text-xs text-muted-foreground">{m.label}</p>
                       </div>
                     ))}
                   </div>
 
-                  <Link
-                    href={`/cases/${c.slug}`}
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-primary/30 text-primary text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  <div
+                    className="mt-auto flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-primary/30 text-primary text-sm font-medium group-hover/link:bg-primary group-hover/link:text-primary-foreground transition-all duration-300"
                   >
-                    Læs case <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
+                    Læs case <ArrowRight className="w-3.5 h-3.5 group-hover/link:-rotate-45 transition-transform" />
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
