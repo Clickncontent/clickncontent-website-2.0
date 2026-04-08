@@ -1,7 +1,7 @@
 [
   {
     "route": "/",
-    "firstLoadUncompressedJsBytes": 1042130,
+    "firstLoadUncompressedJsBytes": 1042108,
     "firstLoadChunkPaths": [
       ".next/static/chunks/13j3iall6ngq0.js",
       ".next/static/chunks/118.vxdt_lto..js",
@@ -11,7 +11,7 @@
       ".next/static/chunks/11907aoolouxt.js",
       ".next/static/chunks/0rsu045rh__i0.js",
       ".next/static/chunks/0kxe-3ofdvnio.js",
-      ".next/static/chunks/06hc.0rt-p-~r.js",
+      ".next/static/chunks/16exhayr9bu3..js",
       ".next/static/chunks/12kb.se6_2y61.js",
       ".next/static/chunks/05d5ynk10.g3s.js",
       ".next/static/chunks/0xyyegdf-3lp4.js",
@@ -62,7 +62,7 @@
   },
   {
     "route": "/cases",
-    "firstLoadUncompressedJsBytes": 1007544,
+    "firstLoadUncompressedJsBytes": 1007641,
     "firstLoadChunkPaths": [
       ".next/static/chunks/13j3iall6ngq0.js",
       ".next/static/chunks/118.vxdt_lto..js",
@@ -70,7 +70,7 @@
       ".next/static/chunks/08v~ot8tu3gmk.js",
       ".next/static/chunks/016u1lzgh_nx-.js",
       ".next/static/chunks/11907aoolouxt.js",
-      ".next/static/chunks/0.zfoggum-har.js",
+      ".next/static/chunks/062yjgmcl9_3a.js",
       ".next/static/chunks/0kxe-3ofdvnio.js",
       ".next/static/chunks/12kb.se6_2y61.js",
       ".next/static/chunks/05d5ynk10.g3s.js",
@@ -102,7 +102,7 @@
   },
   {
     "route": "/priser",
-    "firstLoadUncompressedJsBytes": 803282,
+    "firstLoadUncompressedJsBytes": 803528,
     "firstLoadChunkPaths": [
       ".next/static/chunks/13j3iall6ngq0.js",
       ".next/static/chunks/118.vxdt_lto..js",
@@ -110,7 +110,7 @@
       ".next/static/chunks/08v~ot8tu3gmk.js",
       ".next/static/chunks/016u1lzgh_nx-.js",
       ".next/static/chunks/11907aoolouxt.js",
-      ".next/static/chunks/0i43~i.~fojgp.js",
+      ".next/static/chunks/0wo4qzlm34c0q.js",
       ".next/static/chunks/12kb.se6_2y61.js",
       ".next/static/chunks/05d5ynk10.g3s.js",
       ".next/static/chunks/0xyyegdf-3lp4.js",

@@ -9,7 +9,7 @@ const videos = [
   { id: 2, title: "Lejstudentervogn", platform: "Instagram", src: VIDEOS.lejStudentervogn },
   { id: 3, title: "AJR x Nadia Nadim", platform: "TikTok", src: VIDEOS.nadiaNadim },
   { id: 4, title: "Nygth", platform: "Meta", src: VIDEOS.nygthJanuar },
-  { id: 5, title: "Skønhedsklinik Aarhus", platform: "Instagram", src: VIDEOS.skonhedsklinikThumb },
+  { id: 5, title: "Gainer Hair", platform: "Meta", src: VIDEOS.video1 },
   { id: 6, title: "Yuki", platform: "TikTok", src: VIDEOS.yukiVideo },
 ];
 
