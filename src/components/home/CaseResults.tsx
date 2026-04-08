@@ -148,11 +148,7 @@ const CaseResults = () => {
                 <div className="relative aspect-video overflow-hidden">
                   <img src={c.imageUrl} alt={c.client} className="absolute inset-0 w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center border border-primary-foreground/20 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-500">
-                      <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground ml-0.5 group-hover:text-primary group-hover:fill-primary transition-colors duration-500" />
-                    </div>
-                  </div>
+                  
                   <div className="absolute top-4 left-4">
                     <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
                       {c.industry}
@@ -162,11 +158,7 @@ const CaseResults = () => {
               ) : (
                 <div className={`relative aspect-video bg-gradient-to-b ${c.image} overflow-hidden`}>
                   <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center border border-primary-foreground/20 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-500">
-                      <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground ml-0.5 group-hover:text-primary group-hover:fill-primary transition-colors duration-500" />
-                    </div>
-                  </div>
+                  
                   <div className="absolute top-4 left-4">
                     <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
                       {c.industry}
