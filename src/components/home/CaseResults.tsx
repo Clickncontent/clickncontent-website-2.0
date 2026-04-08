@@ -11,6 +11,7 @@ import { VIDEOS } from "@/lib/supabase";
 const cases = [
   {
     client: "Nadim Aesthetics",
+    slug: "nadim-aesthetics",
     industry: "Skønhed & Æstetik",
     description: "200.000 organiske visninger på 30 dage — 0 kr. i annoncering",
     image: "from-primary/30 via-primary/10 to-foreground/5",
@@ -22,6 +23,7 @@ const cases = [
   },
   {
     client: "Lumant",
+    slug: "lumant",
     industry: "B2B / Leads",
     description: "3x flere leads — lukkeraten på møder steg fra 25% til 50%",
     video: VIDEOS.lumantTestimonial,
@@ -34,6 +36,7 @@ const cases = [
   },
   {
     client: "Hejslet Begravelsesforretning",
+    slug: "hejslet-begravelsesforretning",
     industry: "Begravelse",
     description: "Højt engagement og markant stigning i kundehenvendelser via kreative videoer.",
     video: null,
@@ -128,7 +131,7 @@ const CaseResults = () => {
           {cases.map((c, i) => (
             <motion.div
               key={c.client}
-              className={`glass-card overflow-hidden group transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10 ${
+              className={`glass-card overflow-hidden flex flex-col group transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/10 ${
                 c.client === "Lumant" ? "border-primary/40 bg-primary/5 shadow-lg shadow-primary/10" : ""
               }`}
               initial={{ opacity: 0, y: 40 }}
@@ -156,14 +159,15 @@ const CaseResults = () => {
               )}
 
               {/* Content */}
-              <div className="p-6">
+              <Link href={`/cases/${c.slug}`} className="block p-6 cursor-pointer flex-1 group/link hover:bg-white/[0.02] transition-colors relative z-20">
                 {/* Client logo placeholder */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 border border-primary-foreground/10 flex items-center justify-center">
                     <span className="font-display text-xs font-bold text-primary">{c.client[0]}</span>
                   </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-primary-foreground tracking-wide">{c.client}</h3>
+                  <div className="flex-1 flex justify-between items-center">
+                    <h3 className="font-display text-lg font-bold text-primary-foreground tracking-wide group-hover/link:text-primary transition-colors">{c.client}</h3>
+                    <ArrowRight className="w-5 h-5 text-primary-foreground/30 group-hover/link:text-primary group-hover/link:-rotate-45 transition-all" />
                   </div>
                 </div>
 
@@ -182,7 +186,7 @@ const CaseResults = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Link>
 
               {/* Hover glow line at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/60 transition-all duration-700" />
