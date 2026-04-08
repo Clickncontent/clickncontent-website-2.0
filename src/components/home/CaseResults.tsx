@@ -6,19 +6,19 @@ import Link from 'next/link';
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
-import { VIDEOS } from "@/lib/supabase";
+import { VIDEOS, getMediaUrl } from "@/lib/supabase";
 
 const cases = [
   {
-    client: "Nadim Aesthetics",
-    slug: "nadim-aesthetics",
-    industry: "Skønhed & Æstetik",
-    description: "200.000 organiske visninger på 30 dage — 0 kr. i annoncering",
-    image: "from-primary/30 via-primary/10 to-foreground/5",
+    client: "Ecohus",
+    slug: "ecohus",
+    industry: "Bolig & Ejendom",
+    description: "68x ROI med videoer og datadrevne Meta-kampagner",
+    image: "from-accent/60 via-primary/30 to-accent/20",
     metrics: [
-      { icon: Eye, value: "200K", label: "Visninger" },
-      { icon: Calendar, value: "30", label: "Dage" },
-      { icon: CircleDollarSign, value: "0 kr.", label: "Annoncering" },
+      { icon: Target, value: "68x", label: "ROI" },
+      { icon: Eye, value: "Meta", label: "Platform" },
+      { icon: Video, value: "✓", label: "Video" },
     ],
   },
   {
@@ -40,6 +40,7 @@ const cases = [
     industry: "Begravelse",
     description: "Højt engagement og markant stigning i kundehenvendelser via kreative videoer.",
     video: null,
+    imageUrl: getMediaUrl("images", "dsc01262.jpg"),
     image: "from-primary/20 via-accent to-foreground/5",
     metrics: [
       { icon: Video, value: "15", label: "Videoer" },
@@ -142,6 +143,21 @@ const CaseResults = () => {
               {/* Video preview area */}
               {c.video ? (
                 <VideoCard src={c.video} industry={c.industry} />
+              ) : c.imageUrl ? (
+                <div className="relative aspect-video overflow-hidden">
+                  <img src={c.imageUrl} alt={c.client} className="absolute inset-0 w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center border border-primary-foreground/20 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/40 transition-all duration-500">
+                      <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground ml-0.5 group-hover:text-primary group-hover:fill-primary transition-colors duration-500" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="text-[11px] font-semibold tracking-wider uppercase bg-foreground/60 backdrop-blur-md text-primary-foreground/80 px-3 py-1 rounded-full">
+                      {c.industry}
+                    </span>
+                  </div>
+                </div>
               ) : (
                 <div className={`relative aspect-video bg-gradient-to-b ${c.image} overflow-hidden`}>
                   <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
