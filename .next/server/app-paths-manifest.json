@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/besked-modtaget/page": "app/besked-modtaget/page.js",
+  "/cases/[slug]/page": "app/cases/[slug]/page.js",
+  "/cases/page": "app/cases/page.js",
+  "/kontakt/page": "app/kontakt/page.js",
+  "/om-os/page": "app/om-os/page.js",
+  "/page": "app/page.js",
+  "/priser/page": "app/priser/page.js",
+  "/tak-for-din-bestilling/page": "app/tak-for-din-bestilling/page.js",
+  "/ydelser/page": "app/ydelser/page.js"
+}

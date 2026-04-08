@@ -1,6 +1,9 @@
+"use client";
 import { useState, useEffect } from "react";
 import logo from "@/assets/clickncontent_logo.png";
-import { Link, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { usePathname as useLocation } from 'next/navigation';
+;
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
@@ -28,7 +31,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 pt-4">
@@ -43,8 +46,8 @@ const Navbar = () => {
       >
         <div className="px-5 lg:px-7">
           <div className="flex items-center justify-between h-14 lg:h-16">
-            <Link to="/" className="relative z-10 shrink-0">
-              <img src={logo} alt="ClicknContent" className="h-7 lg:h-8 w-auto" />
+            <Link href="/" className="relative z-10 shrink-0">
+              <img src={logo.src} alt="ClicknContent" className="h-7 lg:h-8 w-auto" />
             </Link>
 
             {/* Desktop Nav */}
@@ -52,16 +55,16 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
-                  to={link.to}
+                  href={link.to}
                   className={cn(
                     "relative text-[13px] font-medium tracking-wide transition-colors duration-300 hover:text-primary py-1",
-                    location.pathname === link.to
+                    location === link.to
                       ? "text-primary"
                       : "text-muted-foreground"
                   )}
                 >
                   {link.label}
-                  {location.pathname === link.to && (
+                  {location === link.to && (
                     <motion.span
                       className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-primary rounded-full"
                       layoutId="nav-underline"
@@ -126,11 +129,11 @@ const Navbar = () => {
                     transition={{ delay: i * 0.05 + 0.1 }}
                   >
                     <Link
-                      to={link.to}
+                      href={link.to}
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         "text-lg font-semibold transition-colors hover:text-primary",
-                        location.pathname === link.to ? "text-primary" : "text-white"
+                        location === link.to ? "text-primary" : "text-white"
                       )}
                     >
                       {link.label}

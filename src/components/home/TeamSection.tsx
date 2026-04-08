@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, X, Linkedin, Instagram } from "lucide-react";
@@ -20,7 +21,7 @@ const team: TeamMember[] = [
     name: "Bartosz Otreba",
     role: "Co-Founder & head of sales",
     initials: "BO",
-    image: bartoszImg,
+    image: bartoszImg.src,
     description:
       "Bartosz driver salg og partnerskaber hos ClicknContent. Med sin energi og passion for performance marketing sørger han for, at vi altid matcher de rigtige brands med de rigtige løsninger.",
   },
@@ -28,7 +29,7 @@ const team: TeamMember[] = [
     name: "Kasper Olander Linder",
     role: "Co-founder & head of operations",
     initials: "KOL",
-    image: kasperImg,
+    image: kasperImg.src,
     description:
       "Kasper sikrer at alt kører gnidningsfrit bag kulisserne. Fra projektledelse til leverancer – han holder styr på processerne, så teamet kan fokusere på det kreative.",
   },
@@ -36,7 +37,7 @@ const team: TeamMember[] = [
     name: "Stig Stryhn Larsen",
     role: "Co-Founder & head of creatives",
     initials: "SSL",
-    image: stigImg,
+    image: stigImg.src,
     description:
       "Stig er hjernen bag det kreative output. Han leder den visuelle retning og sørger for, at hvert creative ikke bare ser godt ud – men performer.",
   },

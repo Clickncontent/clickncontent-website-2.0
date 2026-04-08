@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { Lightbulb, Video, FlaskConical, BarChart3, ArrowRight } from "lucide-react";
 import { Highlight } from "@/components/Highlight";

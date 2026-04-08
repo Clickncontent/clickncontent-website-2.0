@@ -1,6 +1,8 @@
+"use client";
 import { motion } from "framer-motion";
 import { Lightbulb, Video, FlaskConical, BarChart3, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
+;
 import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
 
@@ -39,7 +41,7 @@ const ServicesOverview = () => {
                 Vi dækker hele kæden fra kreativ strategi til performancedata, så du ikke skal koordinere mellem bureau, videograf og mediekøber.
               </p>
               <Button asChild variant="outline" className="rounded-xl group border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:border-primary">
-                <Link to="/ydelser">
+                <Link href="/ydelser">
                   Se alle ydelser
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>

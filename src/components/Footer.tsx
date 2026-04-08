@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import Link from 'next/link';
+;
 import { Mail, Phone, MapPin, ArrowRight, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import logo from "@/assets/clickncontent_logo.png";
@@ -14,8 +15,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <Link to="/">
-              <img src={logo} alt="ClicknContent" className="h-8 w-auto mb-4" />
+            <Link href="/">
+              <img src={logo.src} alt="ClicknContent" className="h-8 w-auto mb-4" />
             </Link>
             <p className="text-sm text-foreground/50 leading-relaxed max-w-xs mb-6">
               Vi skaber højtydende video creatives til paid social, der skalerer din performance på Meta og TikTok.
@@ -55,7 +56,7 @@ const Footer = () => {
                 { to: "/kontakt", label: "Kontakt" },
               ].map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-sm text-foreground/50 hover:text-primary transition-colors duration-300">
+                  <Link href={link.to} className="text-sm text-foreground/50 hover:text-primary transition-colors duration-300">
                     {link.label}
                   </Link>
                 </li>
@@ -67,9 +68,9 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h4 className="text-[11px] font-semibold tracking-widest uppercase text-foreground/30 mb-5">Ydelser</h4>
             <ul className="space-y-3 text-sm text-foreground/50">
-              <li><Link to="/ydelser" className="hover:text-primary transition-colors">Video & fotoproduktion</Link></li>
-              <li><Link to="/ydelser" className="hover:text-primary transition-colors">SoMe & annonce content</Link></li>
-              <li><Link to="/ydelser" className="hover:text-primary transition-colors">Annoncering & betalt trafik</Link></li>
+              <li><Link href="/ydelser" className="hover:text-primary transition-colors">Video & fotoproduktion</Link></li>
+              <li><Link href="/ydelser" className="hover:text-primary transition-colors">SoMe & annonce content</Link></li>
+              <li><Link href="/ydelser" className="hover:text-primary transition-colors">Annoncering & betalt trafik</Link></li>
             </ul>
           </div>
 

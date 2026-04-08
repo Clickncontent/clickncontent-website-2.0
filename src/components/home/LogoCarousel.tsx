@@ -1,3 +1,4 @@
+"use client";
 import { useRef, useEffect, useState } from "react";
 
 import ajr from "@/assets/logos/AJR.png";
@@ -12,16 +13,16 @@ import skoenhedsklinik from "@/assets/logos/SkoenhedsklinikAarhus.png";
 import yuki from "@/assets/logos/YUKI.png";
 
 const logos = [
-  { src: ajr, alt: "AJR" },
-  { src: lumant, alt: "Lumant" },
-  { src: nadim, alt: "Nadim Aesthetic Clinic" },
-  { src: ecohus, alt: "Ecohus" },
-  { src: gainerHair, alt: "Gainer Hair" },
-  { src: cityaddress, alt: "Cityaddress" },
-  { src: nyght, alt: "Nyght" },
-  { src: dressForSuccess, alt: "Dress for Success" },
-  { src: skoenhedsklinik, alt: "Skønhedsklinik Aarhus" },
-  { src: yuki, alt: "YUKI" },
+  { src: ajr.src, alt: "AJR" },
+  { src: lumant.src, alt: "Lumant" },
+  { src: nadim.src, alt: "Nadim Aesthetic Clinic" },
+  { src: ecohus.src, alt: "Ecohus" },
+  { src: gainerHair.src, alt: "Gainer Hair" },
+  { src: cityaddress.src, alt: "Cityaddress" },
+  { src: nyght.src, alt: "Nyght" },
+  { src: dressForSuccess.src, alt: "Dress for Success" },
+  { src: skoenhedsklinik.src, alt: "Skønhedsklinik Aarhus" },
+  { src: yuki.src, alt: "YUKI" },
 ];
 
 const LogoCarousel = () => {

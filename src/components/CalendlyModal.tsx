@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
@@ -16,11 +17,17 @@ export function CalendlyModal({ isOpen, onClose }: CalendlyModalProps) {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
+    if (!mounted) return;
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, mounted]);
+
+  if (!mounted) return null;
 
   return createPortal(
     <AnimatePresence>

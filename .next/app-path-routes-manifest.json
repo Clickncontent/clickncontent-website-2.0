@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/contact/route": "/api/contact",
+  "/besked-modtaget/page": "/besked-modtaget",
+  "/cases/[slug]/page": "/cases/[slug]",
+  "/cases/page": "/cases",
+  "/kontakt/page": "/kontakt",
+  "/om-os/page": "/om-os",
+  "/page": "/",
+  "/priser/page": "/priser",
+  "/tak-for-din-bestilling/page": "/tak-for-din-bestilling",
+  "/ydelser/page": "/ydelser"
+}

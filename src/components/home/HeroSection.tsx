@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+import Link from 'next/link';
+;
 import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight, Play, Star, Volume2, VolumeX } from "lucide-react";
@@ -112,7 +114,7 @@ const HeroSection = () => {
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </CalendlyButton>
               <Button asChild variant="outline" size="lg" className="text-base px-8 h-13 rounded-xl border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <Link to="/cases">Se vores cases</Link>
+                <Link href="/cases">Se vores cases</Link>
               </Button>
             </motion.div>
 

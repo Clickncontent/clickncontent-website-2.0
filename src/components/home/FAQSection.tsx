@@ -1,6 +1,8 @@
+"use client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
+;
 import { ArrowRight } from "lucide-react";
 
 type FAQItem = {
@@ -38,7 +40,7 @@ const faqs: FAQItem[] = [
         <br /><br />
         Vil du have et hurtigt estimat med det samme?{" "}
         <Link
-          to="/priser#prisberegner"
+          href="/priser#prisberegner"
           className="inline-flex items-center gap-1 text-primary font-semibold hover:underline underline-offset-2 transition-colors"
         >
           Prøv vores prisberegner <ArrowRight className="w-3.5 h-3.5" />

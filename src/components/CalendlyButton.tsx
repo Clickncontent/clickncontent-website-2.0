@@ -1,7 +1,9 @@
+"use client";
 import { useState, useEffect } from "react";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { CalendlyModal } from "@/components/CalendlyModal";
-import { useNavigate } from "react-router-dom";
+import { useRouter as useNavigate } from 'next/navigation';
+;
 
 interface CalendlyButtonProps extends ButtonProps {
   children: React.ReactNode;
@@ -19,7 +21,7 @@ export function CalendlyButton({ children, ...props }: CalendlyButtonProps) {
         e.data?.event === "calendly.event_scheduled"
       ) {
         setOpen(false);
-        navigate("/tak-for-din-bestilling");
+        navigate.push("/tak-for-din-bestilling");
       }
     };
     window.addEventListener("message", handleMessage);

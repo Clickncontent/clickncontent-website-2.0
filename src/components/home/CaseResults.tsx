@@ -1,6 +1,8 @@
+"use client";
 import { motion } from "framer-motion";
 import { ArrowRight, Eye, Users, TrendingUp, Play, Pause, BarChart3, Zap, Calendar, CircleDollarSign, Target, CheckCircle2, Video } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
+;
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
@@ -115,7 +117,7 @@ const CaseResults = () => {
             </h2>
           </div>
           <Button asChild variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground self-start sm:self-auto">
-            <Link to="/cases">
+            <Link href="/cases">
               Alle cases
               <ArrowRight className="w-4 h-4 ml-1" />
             </Link>
