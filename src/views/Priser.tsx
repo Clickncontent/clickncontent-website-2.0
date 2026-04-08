@@ -48,13 +48,15 @@ const addOns = [
   { id: "content-strategi", label: "Content-strategi", price: 3000 },
   { id: "marketing-strategi", label: "Marketing-strategi", price: 5000 },
   { id: "data-analyse", label: "Dataanalyse & rapportering", price: 5000 },
+  { id: "meta-ads", label: "Meta Ads håndtering", price: 10000 },
+  { id: "hjemmeside", label: "Hjemmeside", price: 7500 },
 ];
 
 // ── Price per unit ──────────────────────────────────────
 
 const PRICE_PER_AD_VIDEO = 2500;
-const PRICE_PER_ORGANIC_VIDEO = 2000;
-const PRICE_PER_IMAGE = 800;
+const PRICE_PER_ORGANIC_VIDEO = 1500;
+const PRICE_PER_IMAGE = 200;
 
 // ── Helpers ─────────────────────────────────────────────
 
