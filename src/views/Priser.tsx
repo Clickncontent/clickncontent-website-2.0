@@ -49,7 +49,7 @@ const addOns = [
   { id: "marketing-strategi", label: "Marketing-strategi", price: 5000 },
   { id: "data-analyse", label: "Dataanalyse & rapportering", price: 5000 },
   { id: "meta-ads", label: "Meta Ads håndtering", price: 10000 },
-  { id: "hjemmeside", label: "Hjemmeside", price: 7500 },
+  { id: "hjemmeside", label: "Hjemmeside", price: 12000 },
 ];
 
 // ── Price per unit ──────────────────────────────────────
