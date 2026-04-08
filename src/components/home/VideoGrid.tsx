@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { VIDEOS } from "@/lib/supabase";
 
 const videos = [
-  { id: 1, title: "Hurtig Flyt", platform: "Meta", src: VIDEOS.ss6Story },
-  { id: 2, title: "Studentervogn", platform: "Instagram", src: VIDEOS.lejStudentervogn },
-  { id: 3, title: "Nadia Nadim", platform: "TikTok", src: VIDEOS.nadiaNadim },
+  { id: 1, title: "Smartsalg", platform: "Meta", src: VIDEOS.ss6Story },
+  { id: 2, title: "Lejstudentervogn", platform: "Instagram", src: VIDEOS.lejStudentervogn },
+  { id: 3, title: "AJR x Nadia Nadim", platform: "TikTok", src: VIDEOS.nadiaNadim },
   { id: 4, title: "Nygth", platform: "Meta", src: VIDEOS.nygthJanuar },
   { id: 5, title: "Skønhedsklinik Aarhus", platform: "Instagram", src: VIDEOS.skonhedsklinikThumb },
   { id: 6, title: "Yuki", platform: "TikTok", src: VIDEOS.yukiVideo },
