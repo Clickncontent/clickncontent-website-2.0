@@ -14,6 +14,7 @@ const cases = [
     slug: "ecohus",
     industry: "Bolig & Ejendom",
     description: "68x ROI med videoer og datadrevne Meta-kampagner",
+    imageUrl: "/ecohus-case.png",
     image: "from-accent/60 via-primary/30 to-accent/20",
     metrics: [
       { icon: Target, value: "68x", label: "ROI" },
