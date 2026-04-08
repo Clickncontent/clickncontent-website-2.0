@@ -24,8 +24,13 @@ dist-ssr
 *.sw?
 .vercel
 
-# Large video files — host via Supabase/CDN (over GitHub's 100MB limit)
-public/AJR\ testimonial.mp4
-public/Lumant\ testimonial.MP4
-public/Skonhedsklinik\ thumbnail.mp4
+# Large video files — all hosted via Supabase Storage, not committed to git
+public/*.mp4
+public/*.MP4
+public/*.mov
+public/*.webm
+
+# Environment variables (contains Supabase keys)
+.env.local
+.env*.local
 

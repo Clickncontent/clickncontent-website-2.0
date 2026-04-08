@@ -27,7 +27,7 @@ export default function CookieBanner() {
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1234567890'); // Placeholder Pixel ID
+      fbq('init', '826386112897059');
       fbq('track', 'PageView');
     `;
     document.head.appendChild(script);

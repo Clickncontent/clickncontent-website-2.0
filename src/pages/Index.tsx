@@ -18,6 +18,8 @@ const Index = () => {
         <meta property="og:title" content="Content Marketing Bureau Aarhus | ClicknContent" />
         <meta property="og:description" content="Vi er jeres eksterne marketingafdeling med speciale i video og betalte annoncer. Se resultater fra 40+ kunder." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://clickncontent.dk/" />
+        <meta property="og:image" content="https://clickncontent.dk/logo.png" />
         <link rel="canonical" href="https://clickncontent.dk/" />
       </Helmet>
       {/* Overflow hidden strictly applied here to clip X-axis spills globally without penalizing vertical bleeding between Hero and LogoCarousel */}

@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, TrendingUp, Users, Target, Eye, Calendar, CircleDollarSign, Zap, Video, BarChart3 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { VIDEOS, getMediaUrl } from "@/lib/supabase";
 
 const caseData: Record<string, {
   client: string;
@@ -155,8 +156,8 @@ const caseData: Record<string, {
       outro: "Det handler ikke kun om at producere content — men om at teste, identificere og skalere de kreative vinkler, der faktisk virker.",
     },
     color: "from-accent via-primary/20 to-primary/10",
-    heroImage: "/cases/hejslet-logo.png",
-    bodyImage: "/cases/hejslet-photo.png",
+    heroImage: getMediaUrl("images", "hejslet-logo.png"),
+    bodyImage: getMediaUrl("images", "hejslet-photo.png"),
   },
   "dress-for-success": {
     client: "Dress for Success",
@@ -239,7 +240,7 @@ const CaseDetail = () => {
               }`}>
                 {c.slug === "lumant" ? (
                   <video
-                    src="/Lumant testimonial.MP4"
+                    src={VIDEOS.lumantTestimonial}
                     autoPlay
                     muted
                     loop
@@ -431,7 +432,7 @@ const CaseDetail = () => {
                   <p className="text-foreground/60 mb-6">Se Lumants egen udtalelse om samarbejdet.</p>
                   <div className="rounded-xl overflow-hidden border border-primary/10 shadow-lg aspect-video bg-black">
                     <video
-                      src="/Lumant testimonial.MP4"
+                      src={VIDEOS.lumantTestimonial}
                       controls
                       playsInline
                       className="w-full h-full object-cover"

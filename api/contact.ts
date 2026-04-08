@@ -48,58 +48,32 @@ export default async function handler(req: any, res: any) {
     const companyText = company || '—';
 
     // ── Notion: Create lead ────────────────────────────────────
-    // Only runs if env vars are configured — failure is non-blocking
-    if (process.env.NOTION_API_KEY && process.env.NOTION_DATABASE_ID) {
+    // Database: "Give away inbound leads" (ID: 33bb251bad1280c19c1ad01b96753fa1)
+    // Columns: Virksomhed (title), Navn (rich_text), Email (email),
+    //          Telefon nummer (phone_number), Besked (rich_text)
+    if (process.env.NOTION_API_KEY) {
       try {
         const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-        // Auto-detect the title property name to avoid hardcoding
-        const db = await notion.databases.retrieve({
-          database_id: process.env.NOTION_DATABASE_ID,
-        });
-        const titlePropName =
-          Object.keys(db.properties).find(
-            (key) => (db.properties[key] as any).type === 'title'
-          ) || 'Name';
-
         await notion.pages.create({
-          parent: { database_id: process.env.NOTION_DATABASE_ID },
+          parent: { database_id: '33bb251bad1280c19c1ad01b96753fa1' },
           properties: {
-            // Title = Virksomhed — the bold heading of the Notion row
-            [titlePropName]:  { title: [{ text: { content: companyText } }] },
-            // Kontaktperson
+            // Title property = Virksomhed
+            'Virksomhed':     { title: [{ text: { content: companyText } }] },
             'Navn':           { rich_text: [{ text: { content: name } }] },
-            // Email
             'Email':          { email },
-            // Phone
             'Telefon nummer': { phone_number: phone },
-            // Status = Inbound lead (existing status option)
-            'Status':         { status: { name: 'Inbound lead' } },
+            'Besked':         { rich_text: [{ text: { content: message } }] },
           },
-          // Besked skrives som sidens body-indhold, ikke en property
-          children: [
-            {
-              object: 'block',
-              type: 'heading_3',
-              heading_3: {
-                rich_text: [{ type: 'text', text: { content: '💬 Besked fra hjemmesiden' } }],
-              },
-            } as any,
-            {
-              object: 'block',
-              type: 'paragraph',
-              paragraph: {
-                rich_text: [{ type: 'text', text: { content: message } }],
-              },
-            } as any,
-          ],
         });
-      } catch (notionError) {
+
+        console.log('✅ Notion lead created successfully');
+      } catch (notionError: any) {
         // Non-blocking: log but allow the email to still go out
-        console.error('Notion error:', notionError);
+        console.error('Notion error:', notionError?.message || notionError);
       }
     } else {
-      console.warn('NOTION_API_KEY or NOTION_DATABASE_ID not set — skipping Notion');
+      console.warn('NOTION_API_KEY not set — skipping Notion');
     }
 
     // ── Resend: Email notification ─────────────────────────────

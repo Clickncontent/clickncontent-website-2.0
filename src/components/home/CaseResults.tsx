@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/Highlight";
+import { VIDEOS } from "@/lib/supabase";
 
 const cases = [
   {
@@ -21,7 +22,7 @@ const cases = [
     client: "Lumant",
     industry: "B2B / Leads",
     description: "3x flere leads — lukkeraten på møder steg fra 25% til 50%",
-    video: "/Lumant testimonial.MP4",
+    video: VIDEOS.lumantTestimonial,
     image: "from-accent via-primary/15 to-foreground/5",
     metrics: [
       { icon: Users, value: "3x", label: "Leads" },

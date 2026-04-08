@@ -4,6 +4,7 @@ import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight, Play, Star, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { VIDEOS } from "@/lib/supabase";
 
 const HeroSection = () => {
   const mainVideoRef = useRef<HTMLVideoElement>(null);
@@ -150,7 +151,7 @@ const HeroSection = () => {
               >
                 <video 
                   ref={mainVideoRef}
-                  src="/Transformer story.mp4" 
+                  src={VIDEOS.transformerStory} 
                   autoPlay muted={isMainMuted} loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
@@ -199,7 +200,7 @@ const HeroSection = () => {
               >
                 <video 
                   ref={smallVideoRef}
-                  src="/Nadia Nadim.mp4" 
+                  src={VIDEOS.nadiaNadimNew} 
                   preload="auto"
                   loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-70"

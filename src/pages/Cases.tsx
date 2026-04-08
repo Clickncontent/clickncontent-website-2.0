@@ -5,6 +5,7 @@ import { Play, Pause, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import Testimonials from "@/components/home/Testimonials";
+import { VIDEOS, getMediaUrl } from "@/lib/supabase";
 
 // Click-to-play video for case cards
 const CaseVideoCard = ({ src, color, platform }: { src: string; color: string; platform: string }) => {
@@ -76,8 +77,8 @@ const cases = [
     ],
     color: "from-primary/20 to-accent",
     imageColor: "from-primary/40 via-primary/20 to-accent/60",
-    video: "/Nadim thumbnail.mp4",
-    image: "/Nadim Aestethics.jpeg",
+    video: VIDEOS.nadimThumbnail,
+    image: getMediaUrl("images", "nadim-aesthetics.jpeg"),
   },
   {
     client: "Lumant",
@@ -92,8 +93,8 @@ const cases = [
     ],
     color: "from-accent to-primary/15",
     imageColor: "from-accent/60 via-primary/30 to-primary/10",
-    video: "/Lumant thumbnail.mp4",
-    image: "/Lumant.webp",
+    video: VIDEOS.lumantThumbnail,
+    image: getMediaUrl("images", "lumant.webp"),
   },
   {
     client: "Skønhedsklinik Aarhus",
@@ -108,8 +109,8 @@ const cases = [
     ],
     color: "from-primary/15 to-accent",
     imageColor: "from-primary/30 via-accent/40 to-primary/10",
-    video: "/Skonhedsklinik thumbnail.mp4",
-    image: "/Skonhedsklinik.png",
+    video: VIDEOS.skonhedsklinikThumb,
+    image: getMediaUrl("images", "skonhedsklinik.png"),
   },
   {
     client: "Ecohus",
@@ -140,8 +141,8 @@ const cases = [
     ],
     color: "from-primary/20 to-accent",
     imageColor: "from-primary/35 via-accent/40 to-primary/15",
-    video: "/Dressforsuccess.mp4",
-    image: "/Dressforsuccess.JPG",
+    video: VIDEOS.dressforsuccess,
+    image: getMediaUrl("images", "dressforsuccess.jpg"),
   },
   {
     client: "Hejslet Begravelsesforretning",
@@ -156,8 +157,8 @@ const cases = [
     ],
     color: "from-accent to-primary/15",
     imageColor: "from-primary/20 via-accent/50 to-primary/20",
-    video: "/Hejslet.mp4",
-    image: "/DSC01262.JPG",
+    video: VIDEOS.hejslet,
+    image: getMediaUrl("images", "dsc01262.jpg"),
   },
 ];
 

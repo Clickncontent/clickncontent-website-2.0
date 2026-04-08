@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { VIDEOS } from "@/lib/supabase";
 
 const testimonials = [
   {
@@ -46,8 +47,8 @@ const Testimonials = () => {
         {/* Video testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
           {[
-            { src: "/Lumant testimonial.MP4", label: "Lumant", desc: "B2B / Leads" },
-            { src: "/AJR testimonial.mp4", label: "AJR", desc: "Kunde" },
+            { src: VIDEOS.lumantTestimonial, label: "Lumant", desc: "B2B / Leads" },
+            { src: VIDEOS.ajrTestimonial, label: "AJR", desc: "Kunde" },
           ].map((v, i) => (
             <motion.div
               key={v.label}

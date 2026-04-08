@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import { useRef, useState } from "react";
+import { VIDEOS } from "@/lib/supabase";
+
 const contentFormats = [
   { icon: InfinityIcon, title: "Meta Ads" },
   { icon: Linkedin, title: "LinkedIn Ads" },
@@ -139,7 +141,7 @@ const Ydelser = () => {
               >
                 <video 
                   ref={videoRef}
-                  src="/Balvid.mp4" 
+                  src={VIDEOS.balvid} 
                   autoPlay loop muted playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />

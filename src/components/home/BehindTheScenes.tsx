@@ -1,21 +1,53 @@
 import { motion } from "framer-motion";
 
-// ─── BTS images: bts-001 to bts-168, skip bts-071 (it's a .mov video) ────────
-const getExt = (n: number) => {
-  if (n === 19) return "png";
-  if (n === 168) return "webp";
-  // bts-041 to bts-167 are .jpeg, except 118 and 165 which are .jpg
-  if (n >= 41 && n <= 167 && n !== 118 && n !== 165) return "jpeg";
-  return "jpg";
-};
+const btsImageNames = [
+  "Bartosz skonhedsklinik.webp",
+  "Bartosz, Martin, Kasper.webp",
+  "DSC00129.JPG",
+  "IMG_2823.jpeg",
+  "IMG_2963.jpeg",
+  "IMG_2983.jpeg",
+  "IMG_3107.jpeg",
+  "IMG_3459.jpeg",
+  "IMG_3477.jpeg",
+  "IMG_3515.jpeg",
+  "IMG_3721.jpeg",
+  "IMG_4646.jpeg",
+  "IMG_4700.jpeg",
+  "IMG_4988.jpeg",
+  "IMG_5078.jpeg",
+  "IMG_5583.jpeg",
+  "IMG_5593.jpeg",
+  "IMG_5894.jpeg",
+  "IMG_5930.jpeg",
+  "IMG_5971.jpeg",
+  "IMG_6206.jpeg",
+  "IMG_7026.jpeg",
+  "IMG_7030.jpeg",
+  "IMG_7201.jpeg",
+  "IMG_7295.jpeg",
+  "IMG_9565.jpeg",
+  "Kasper-Bartosz-Stig.webp",
+  "Martin og Bartosz.webp",
+  "Mathias-bartosz-stig.webp",
+  "Minigolf.webp",
+  "Nyght studie shoot.webp",
+  "amalie-cityadress.webp",
+  "dressforsuccess-shoot.webp",
+  "dressforsuccess.webp",
+  "dsc02739-1-1.webp",
+  "frederik-gainer.webp",
+  "kasper-bartosz-mode.webp",
+  "mathias-bartosz.webp",
+  "stig-danser.webp",
+  "studie.webp",
+  "team-cnc.webp",
+];
 
-// Take every 5th image (~34 images) and skip the video file (71)
-const btsImages = Array.from({ length: 168 }, (_, i) => i + 1)
-  .filter((n) => n % 5 === 1 && n !== 71)
-  .map((n) => ({
-    src: `/bts/bts-${String(n).padStart(3, "0")}.${getExt(n)}`,
-    alt: "Bag kameraet — ClicknContent",
-  }));
+const btsImages = btsImageNames.map((name) => ({
+  src: `/bts/${encodeURI(name)}`,
+  alt: "Bag kameraet — ClicknContent",
+}));
 
 const BehindTheScenes = () => {
   return (
@@ -30,7 +62,7 @@ const BehindTheScenes = () => {
           display: flex;
           gap: 1rem;
           width: max-content;
-          animation: bts-scroll 80s linear infinite;
+          animation: bts-scroll 120s linear infinite;
           will-change: transform;
         }
         .bts-track:hover {
