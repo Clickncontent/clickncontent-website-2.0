@@ -148,7 +148,7 @@ const HeroSection = () => {
             >
               {/* Main video card */}
               <div 
-                className="relative aspect-[9/16] max-w-[280px] mx-auto rounded-2xl bg-card border border-primary-foreground/10 overflow-hidden shadow-2xl shadow-primary/10 cursor-pointer group"
+                className="relative z-20 aspect-[9/16] max-w-[280px] mx-auto rounded-2xl bg-card border border-primary-foreground/10 overflow-hidden shadow-2xl shadow-primary/10 cursor-pointer group"
                 onClick={toggleMainVideo}
               >
                 <video 
@@ -195,7 +195,7 @@ const HeroSection = () => {
 
               {/* Floating secondary card */}
               <motion.div
-                className="absolute -left-12 top-1/3 w-[160px] aspect-[9/16] rounded-xl bg-card border border-primary-foreground/10 shadow-xl opacity-80 overflow-hidden cursor-pointer group"
+                className="absolute z-10 -left-12 top-1/3 w-[160px] aspect-[9/16] rounded-xl bg-card border border-primary-foreground/10 shadow-xl opacity-80 overflow-hidden cursor-pointer group"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                 onClick={toggleSmallVideo}
@@ -229,7 +229,7 @@ const HeroSection = () => {
 
               {/* Floating metric badge bottom */}
               <motion.div
-                className="absolute -left-8 bottom-16 bg-card rounded-xl p-3 shadow-xl border border-border"
+                className="absolute z-30 -left-8 bottom-16 bg-card rounded-xl p-3 shadow-xl border border-border"
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1 }}
               >
