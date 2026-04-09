@@ -93,11 +93,11 @@ export function CalendlyModal({ isOpen, onClose }: CalendlyModalProps) {
               </div>
 
               {/* Calendly iframe */}
-              <div className="relative z-10 px-4 pb-4">
+              <div className="relative z-10 px-4 pb-4 h-[700px] sm:h-[750px]">
                 <iframe
                   src={CALENDLY_URL}
                   width="100%"
-                  height="560"
+                  height="100%"
                   frameBorder="0"
                   title="Book et møde"
                   style={{ borderRadius: "12px", display: "block" }}

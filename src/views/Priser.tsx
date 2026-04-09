@@ -49,6 +49,7 @@ const addOns = [
   { id: "marketing-strategi", label: "Marketing-strategi", price: 5000 },
   { id: "data-analyse", label: "Dataanalyse & rapportering", price: 5000 },
   { id: "meta-ads", label: "Meta Ads håndtering", price: 10000 },
+  { id: "linkbuilding", label: "Linkbuilding", price: 5000 },
   { id: "hjemmeside", label: "Hjemmeside", price: 12000 },
 ];
 
@@ -138,7 +139,7 @@ const Priser = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
               >
-                <div className="card-content !px-6 !py-10 lg:!px-8 lg:!py-12">
+                <div className="card-content !px-6 !py-10 lg:!px-8 lg:!py-12 flex flex-col h-full">
                   {pkg.badge && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
                       <span className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-md">
@@ -163,7 +164,7 @@ const Priser = () => {
                     </div>
                   </div>
 
-                  <div className="card-body">
+                  <div className="card-body flex flex-col flex-1">
                     <h3 className="card-title text-4xl mb-1">{pkg.price}</h3>
                     <p className="card-description mb-6">DKK / {pkg.period}</p>
                     
