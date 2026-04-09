@@ -92,14 +92,44 @@ const Priser = () => {
     return base + extras;
   }, [adVideos, organicVideos, images, selectedAddOns]);
 
-  const handleOptIn = (e: React.FormEvent) => {
+  const handleOptIn = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!optInName.trim() || !optInEmail.trim()) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setPriceRevealed(true);
-      setSubmitting(false);
-    }, 600);
+
+    const addOnLabels = selectedAddOns.length > 0
+      ? selectedAddOns.map(id => addOns.find(a => a.id === id)?.label).join(", ")
+      : "Ingen";
+
+    const message = `LEAD FRA PRISBEREGNER
+Valg:
+• ${adVideos[0]} annoncevideoer
+• ${organicVideos[0]} organiske videoer
+• ${images[0]} billeder
+
+Tilvalg: ${addOnLabels}
+
+Estimeret pris: ${formatDKK(estimatedPrice)}`;
+
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: optInName,
+          email: optInEmail,
+          phone: "00000000", // Dummy pga validation
+          company: "Prisberegner",
+          message: message,
+          consent: true,
+        }),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
+    setPriceRevealed(true);
+    setSubmitting(false);
   };
 
   return (
