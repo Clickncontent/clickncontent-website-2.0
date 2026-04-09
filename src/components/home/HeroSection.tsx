@@ -223,8 +223,8 @@ const HeroSection = () => {
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
               >
-                <p className="font-display text-base font-bold text-primary">End-to-end</p>
-                <p className="text-xs text-muted-foreground">Produktion</p>
+                <p className="font-display text-base font-bold text-primary">Performance video</p>
+                <p className="text-xs text-muted-foreground">In house produktion</p>
               </motion.div>
 
               {/* Floating metric badge bottom */}
@@ -233,8 +233,8 @@ const HeroSection = () => {
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1 }}
               >
-                <p className="font-display text-lg font-bold text-primary">-42%</p>
-                <p className="text-xs text-muted-foreground">CPA reduktion</p>
+                <p className="font-display text-base font-bold text-primary">Creative testing</p>
+                <p className="text-xs text-muted-foreground">Meta ads</p>
               </motion.div>
             </motion.div>
           </div>
