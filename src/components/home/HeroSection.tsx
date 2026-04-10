@@ -187,9 +187,9 @@ const HeroSection = () => {
                     </div>
                   </div>
                 )}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/80 to-transparent">
-                  <p className="text-sm font-medium text-primary-foreground">UGC Campaign</p>
-                  <p className="text-xs text-primary-foreground/60">Meta · 6.2x ROI</p>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none">
+                  <p className="text-sm font-medium text-primary-foreground">Performance video</p>
+                  <p className="text-xs text-primary-foreground/60">In house produktion</p>
                 </div>
               </div>
 
@@ -223,8 +223,8 @@ const HeroSection = () => {
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
               >
-                <p className="font-display text-base font-bold text-primary">Performance video</p>
-                <p className="text-xs text-muted-foreground">In house produktion</p>
+                <p className="font-display text-base font-bold text-primary">End-to-end</p>
+                <p className="text-xs text-muted-foreground">Produktion</p>
               </motion.div>
 
               {/* Floating metric badge bottom */}
