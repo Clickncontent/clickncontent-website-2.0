@@ -55,7 +55,7 @@ const LogoCarousel = () => {
 
     let animationId: number;
     let position = 0;
-    const speed = 1.2; // px per frame
+    const speed = 2.5; // px per frame
 
     const step = () => {
       if (!isPaused) {
