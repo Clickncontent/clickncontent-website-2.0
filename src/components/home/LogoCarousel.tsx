@@ -11,6 +11,16 @@ import nyght from "@/assets/logos/Nyght.png";
 import dressForSuccess from "@/assets/logos/DressForSuccess.png";
 import skoenhedsklinik from "@/assets/logos/SkoenhedsklinikAarhus.png";
 import yuki from "@/assets/logos/YUKI.png";
+import logo19 from "@/assets/logos/logo19.png";
+import logo20 from "@/assets/logos/logo20.png";
+import logo21 from "@/assets/logos/logo21.png";
+import logo22 from "@/assets/logos/logo22.png";
+import logo23 from "@/assets/logos/logo23.png";
+import logo24 from "@/assets/logos/logo24.png";
+import logo25 from "@/assets/logos/logo25.png";
+import logo26 from "@/assets/logos/logo26.png";
+import logo27 from "@/assets/logos/logo27.png";
+import logo28 from "@/assets/logos/logo28.png";
 
 const logos = [
   { src: ajr.src, alt: "AJR" },
@@ -23,6 +33,16 @@ const logos = [
   { src: dressForSuccess.src, alt: "Dress for Success" },
   { src: skoenhedsklinik.src, alt: "Skønhedsklinik Aarhus" },
   { src: yuki.src, alt: "YUKI" },
+  { src: logo19.src, alt: "Logo 19" },
+  { src: logo20.src, alt: "Logo 20" },
+  { src: logo21.src, alt: "Logo 21" },
+  { src: logo22.src, alt: "Logo 22" },
+  { src: logo23.src, alt: "Logo 23" },
+  { src: logo24.src, alt: "Logo 24" },
+  { src: logo25.src, alt: "Logo 25" },
+  { src: logo26.src, alt: "Logo 26" },
+  { src: logo27.src, alt: "Logo 27" },
+  { src: logo28.src, alt: "Logo 28" },
 ];
 
 const LogoCarousel = () => {
