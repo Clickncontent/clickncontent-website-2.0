@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -19,7 +20,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" type="image/png" href="/logo.png" />
         <link href='https://assets.calendly.com/assets/external/widget.css' rel='stylesheet' />
-        <script src='https://assets.calendly.com/assets/external/widget.js' async></script>
         
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Toaster />
         <Sonner />
         <SpeedInsights />
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
       </body>
     </html>
   );
