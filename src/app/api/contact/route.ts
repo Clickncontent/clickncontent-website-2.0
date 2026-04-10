@@ -45,6 +45,12 @@ export async function POST(req: Request) {
     const { name, email, phone, company, message } = result.data;
     const companyText = company || '—';
 
+    if (!process.env.NOTION_API_KEY) {
+      console.error("NOTION_API_KEY mangler i Environment Variables!");
+      // We will still allow email sending if resend works, but let's be strict for debugging:
+      // return NextResponse.json({ error: 'NOTION_API_KEY mangler i Vercel.' }, { status: 500 });
+    }
+
     if (process.env.NOTION_API_KEY) {
       try {
         const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -61,6 +67,7 @@ export async function POST(req: Request) {
         console.log('✅ Notion lead created successfully');
       } catch (notionError: any) {
         console.error('Notion error:', notionError?.message || notionError);
+        return NextResponse.json({ error: `Notion fejlede: ${notionError?.message}` }, { status: 500 });
       }
     }
 
