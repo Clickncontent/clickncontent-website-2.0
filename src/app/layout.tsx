@@ -11,6 +11,8 @@ export const metadata = {
   description: "Vi er jeres eksterne marketingafdeling med speciale i video og betalte annoncer. Se resultater fra 40+ kunder.",
 };
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="da" suppressHydrationWarning>
@@ -32,6 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </TooltipProvider>
         <Toaster />
         <Sonner />
+        <SpeedInsights />
       </body>
     </html>
   );
