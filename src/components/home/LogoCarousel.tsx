@@ -48,31 +48,36 @@ const logos = [
 const LogoCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const isPausedRef = useRef(false);
+  const positionRef = useRef(0);
+
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
     let animationId: number;
-    let position = 0;
     const speed = 2.5; // px per frame
 
     const step = () => {
-      if (!isPaused) {
-        position += speed;
+      if (!isPausedRef.current) {
+        positionRef.current += speed;
         // Reset when we've scrolled through the first set of logos
         const halfWidth = el.scrollWidth / 2;
-        if (position >= halfWidth) {
-          position = 0;
+        if (positionRef.current >= halfWidth) {
+          positionRef.current = 0;
         }
-        el.style.transform = `translateX(-${position}px)`;
+        el.style.transform = `translateX(-${positionRef.current}px)`;
       }
       animationId = requestAnimationFrame(step);
     };
 
     animationId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(animationId);
-  }, [isPaused]);
+  }, []);
 
   // Duplicate for seamless loop
   const allLogos = [...logos, ...logos];
