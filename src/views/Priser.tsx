@@ -47,22 +47,22 @@ const PRICE_PER_IMAGE = 200;
 
 const contentTypes = [
   {
-    id: "videos",
+    id: "paid",
     icon: Video,
-    label: "Videoer",
-    description: "Annonce- og organiske videoer til sociale medier",
+    label: "Paid videoer",
+    description: "Annoncevideoer til Meta, TikTok og Google Ads.",
   },
   {
-    id: "images",
-    icon: Image,
-    label: "Billeder",
-    description: "Professionelle stillbilleder til brand og socials.",
+    id: "organic",
+    icon: TrendingUp,
+    label: "Organiske videoer",
+    description: "Organisk content til sociale medier og brand.",
   },
   {
     id: "both",
     icon: Layers,
     label: "Begge dele",
-    description: "En komplet content-pakke med både video og billeder.",
+    description: "En komplet mix af paid og organiske videoer.",
   },
 ];
 
@@ -121,6 +121,8 @@ const videoVolumes = [
     organicVideos: 8,
   },
 ];
+
+const imageCountOptions = [5, 10, 20, 30];
 
 const addOnOptions = [
   { id: "scripts", label: "Scripts", price: 1000, icon: FileText, description: "Kreative manuskripter til dine videoer" },
@@ -287,6 +289,9 @@ export default function Priser() {
   const [ambition, setAmbition] = useState<string | null>(null);
   const [videoVolume, setVideoVolume] = useState<string | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  // Images add-on (selected in add-ons step)
+  const [imagesEnabled, setImagesEnabled] = useState(false);
+  const [imageCount, setImageCount] = useState(10);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -310,18 +315,23 @@ export default function Priser() {
     const vol = videoVolumes.find((v) => v.id === videoVolume);
     const amb = ambitions.find((a) => a.id === ambition);
 
-    let adVideos = vol?.adVideos ?? amb?.videoCount.ad ?? 3;
-    let organicVideos = vol?.organicVideos ?? amb?.videoCount.organic ?? 2;
-    let images = contentType === "both" ? (amb?.imageCount ?? 10) : 0;
-
-    if (contentType === "images") {
-      adVideos = 0;
-      organicVideos = 0;
-      images = amb?.imageCount ?? 20;
+    // Paid = ad videos, Organic = organic videos, Both = mix
+    let adVideos = 0;
+    let organicVideos = 0;
+    if (contentType === "paid") {
+      adVideos = vol?.adVideos ?? amb?.videoCount.ad ?? 3;
+    } else if (contentType === "organic") {
+      organicVideos = vol?.organicVideos ?? amb?.videoCount.organic ?? 3;
+    } else {
+      // both
+      adVideos = vol?.adVideos ?? amb?.videoCount.ad ?? 3;
+      organicVideos = vol?.organicVideos ?? amb?.videoCount.organic ?? 2;
     }
 
+    const images = imagesEnabled ? imageCount : 0;
+
     return { adVideos, organicVideos, images };
-  }, [contentType, ambition, videoVolume]);
+  }, [contentType, ambition, videoVolume, imagesEnabled, imageCount]);
 
   const addOnTotal = useMemo(() =>
     addOnOptions
@@ -384,7 +394,7 @@ export default function Priser() {
   const canProceed = () => {
     if (step === 0) return contentType !== null;
     if (step === 1) return ambition !== null;
-    if (step === 2) return contentType === "images" || videoVolume !== null;
+    if (step === 2) return videoVolume !== null;
     if (step === 3) return true;
     return false;
   };
@@ -576,10 +586,10 @@ export default function Priser() {
 
                 <AnimatePresence mode="wait" custom={direction}>
 
-                  {/* ── Step 0: Type ── */}
+                  {/* ── Step 0: Video type ── */}
                   {step === 0 && (
                     <motion.div key="step-0" custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28, ease: "easeInOut" }}>
-                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">Hvad skal vi producere?</h3>
+                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">Hvilken type videoer?</h3>
                       <p className="text-white/50 mb-8 text-sm">Vælg den type content der passer bedst til jeres behov.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                         {contentTypes.map((ct) => (
@@ -617,7 +627,7 @@ export default function Priser() {
                   )}
 
                   {/* ── Step 2: Volume ── */}
-                  {step === 2 && contentType !== "images" && (
+                  {step === 2 && (
                     <motion.div key="step-2" custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28, ease: "easeInOut" }}>
                       <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">Hvor mange videoer?</h3>
                       <p className="text-white/50 mb-8 text-sm">Vælg det volumen der passer til jeres aktivitetsniveau.</p>
@@ -634,23 +644,81 @@ export default function Priser() {
                     </motion.div>
                   )}
 
-                  {step === 2 && contentType === "images" && (
-                    <motion.div key="step-2-images" custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28, ease: "easeInOut" }}>
-                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">Billedpakken er klar 🎉</h3>
-                      <p className="text-white/50 mb-8 text-sm">Vi har noteret, at I ønsker stillbilleder. Gå videre for at vælge eventuelle tilvalg.</p>
-                      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-                        <p className="text-white/60 text-sm">Professionelle stillbilleder produceret af vores team</p>
-                        <p className="text-primary font-bold text-2xl mt-2">{formatDKK(20 * PRICE_PER_IMAGE)}</p>
-                        <p className="text-white/30 text-xs mt-1">Starting fra 20 billeder / ekskl. moms</p>
-                      </div>
-                    </motion.div>
-                  )}
-
                   {/* ── Step 3: Add-ons ── */}
                   {step === 3 && (
                     <motion.div key="step-3" custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28, ease: "easeInOut" }}>
                       <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">Særlige tilvalg?</h3>
                       <p className="text-white/50 mb-8 text-sm">Tilføj ekstra services til din pakke — eller spring over.</p>
+
+                      {/* ── Images add-on ── */}
+                      <div className="mb-4">
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                          whileTap={{ scale: 0.99 }}
+                          onClick={() => setImagesEnabled((v) => !v)}
+                          className={cn(
+                            "relative flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300",
+                            imagesEnabled
+                              ? "border-primary/40 bg-primary/10 shadow-[0_0_20px_rgba(49,149,220,0.15)]"
+                              : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]"
+                          )}
+                        >
+                          <div className={cn("w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors", imagesEnabled ? "bg-primary/20" : "bg-white/5")}>
+                            <Image className={cn("w-4 h-4 transition-colors", imagesEnabled ? "text-primary" : "text-white/50")} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-xs font-semibold">Billeder</p>
+                            <p className="text-white/40 text-xs truncate">Professionelle stillbilleder til brand og socials</p>
+                          </div>
+                          <span className={cn("text-xs font-bold whitespace-nowrap transition-colors", imagesEnabled ? "text-primary" : "text-white/40")}>
+                            +{PRICE_PER_IMAGE.toLocaleString("da-DK")} kr/stk
+                          </span>
+                          {imagesEnabled && (
+                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
+                              className="absolute top-2 right-2 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+                              <Check className="w-2.5 h-2.5 text-white" />
+                            </motion.div>
+                          )}
+                        </motion.div>
+
+                        {/* Image count selector */}
+                        <AnimatePresence>
+                          {imagesEnabled && (
+                            <motion.div
+                              key="image-count"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.25, ease: "easeInOut" }}
+                              style={{ overflow: "hidden" }}
+                            >
+                              <div className="mt-3 px-4 py-4 rounded-xl border border-primary/20 bg-primary/5">
+                                <p className="text-white/60 text-xs font-semibold mb-3">Antal billeder</p>
+                                <div className="flex gap-3 flex-wrap">
+                                  {imageCountOptions.map((count) => (
+                                    <button
+                                      key={count}
+                                      onClick={(e) => { e.stopPropagation(); setImageCount(count); }}
+                                      className={cn(
+                                        "px-4 py-1.5 rounded-lg text-xs font-bold border-2 transition-all duration-200",
+                                        imageCount === count
+                                          ? "border-primary bg-primary/20 text-primary"
+                                          : "border-white/15 bg-white/5 text-white/50 hover:border-white/30"
+                                      )}
+                                    >
+                                      {count} stk
+                                    </button>
+                                  ))}
+                                </div>
+                                <p className="text-white/30 text-xs mt-3">
+                                  {imageCount} billeder · {formatDKK(imageCount * PRICE_PER_IMAGE)}
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {addOnOptions.map((addon) => {
                           const isSelected = selectedAddOns.includes(addon.id);
@@ -817,28 +885,29 @@ export default function Priser() {
                                   </motion.span>
                                 </div>
 
-                                {(contentType !== "images") && (
-                                  <>
-                                    <SliderField
-                                      label="Annoncevideoer"
-                                      unit={`${ftAdVideos[0]} videoer`}
-                                      price={formatDKK(ftAdVideos[0] * PRICE_PER_AD_VIDEO)}
-                                      sliderValue={ftAdVideos}
-                                      onChange={setFtAdVideos}
-                                      max={20}
-                                    />
-                                    <SliderField
-                                      label="Organiske videoer"
-                                      unit={`${ftOrganicVideos[0]} videoer`}
-                                      price={formatDKK(ftOrganicVideos[0] * PRICE_PER_ORGANIC_VIDEO)}
-                                      sliderValue={ftOrganicVideos}
-                                      onChange={setFtOrganicVideos}
-                                      max={20}
-                                    />
-                                  </>
+                                {(contentType === "paid" || contentType === "both") && (
+                                  <SliderField
+                                    label="Paid videoer"
+                                    unit={`${ftAdVideos[0]} videoer`}
+                                    price={formatDKK(ftAdVideos[0] * PRICE_PER_AD_VIDEO)}
+                                    sliderValue={ftAdVideos}
+                                    onChange={setFtAdVideos}
+                                    max={20}
+                                  />
                                 )}
 
-                                {(contentType === "images" || contentType === "both") && (
+                                {(contentType === "organic" || contentType === "both") && (
+                                  <SliderField
+                                    label="Organiske videoer"
+                                    unit={`${ftOrganicVideos[0]} videoer`}
+                                    price={formatDKK(ftOrganicVideos[0] * PRICE_PER_ORGANIC_VIDEO)}
+                                    sliderValue={ftOrganicVideos}
+                                    onChange={setFtOrganicVideos}
+                                    max={20}
+                                  />
+                                )}
+
+                                {imagesEnabled && (
                                   <SliderField
                                     label="Billeder"
                                     unit={`${ftImages[0]} billeder`}
@@ -878,9 +947,10 @@ export default function Priser() {
                       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 mb-6 text-left space-y-3">
                         <p className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-3">Jeres konfiguration</p>
                         {[
-                          { label: "Content type", value: contentTypes.find((c) => c.id === contentType)?.label },
+                          { label: "Videotype", value: contentTypes.find((c) => c.id === contentType)?.label },
                           { label: "Ambition", value: ambitions.find((a) => a.id === ambition)?.label },
                           videoVolume ? { label: "Videovolumen", value: videoVolumes.find((v) => v.id === videoVolume)?.label } : null,
+                          imagesEnabled ? { label: "Billeder", value: `${imageCount} stk` } : null,
                           selectedAddOns.length > 0 ? { label: "Tilvalg", value: selectedAddOns.map((id) => addOnOptions.find((a) => a.id === id)?.label).join(", ") } : null,
                         ].filter(Boolean).map((item: any, i) => (
                           <div key={i} className="flex items-center justify-between">
