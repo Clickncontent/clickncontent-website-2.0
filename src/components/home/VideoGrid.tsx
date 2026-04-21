@@ -73,6 +73,7 @@ const VideoCard = ({ video, index }: { video: any, index: number }) => {
               loop
               muted={false}
               playsInline
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover"
             />
           )}
