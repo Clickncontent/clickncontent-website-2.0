@@ -29,7 +29,7 @@ export function getMediaUrl(bucket: "videos" | "images", filename: string): stri
 export const VIDEOS = {
   // Hero — not yet uploaded to R2
   transformerStory:       `${R2}/Transformer story.mp4`,
-  nadiaNadim:             `${R2}/Nadim skils.mp4`,
+  nadiaNadim:             `${R2}/Nadia Nadim.mp4`,
   nadiaNadimNew:          `${R2}/nadia-nadim-new.mp4`,
   // VideoGrid
   ss6Story:               `${R2}/Smartsalg.mp4`,
