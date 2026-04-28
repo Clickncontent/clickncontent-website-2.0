@@ -36,3 +36,6 @@ public/*.webm
 .env.local
 .env*.local
 
+# Compressed video outputs
+WebOptimized/
+
