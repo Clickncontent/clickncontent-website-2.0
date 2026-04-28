@@ -203,7 +203,7 @@ const HeroSection = () => {
                 <video 
                   ref={smallVideoRef}
                   src={VIDEOS.nadiaNadim} 
-                  preload="metadata"
+                  preload="none"
                   loop playsInline 
                   className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />

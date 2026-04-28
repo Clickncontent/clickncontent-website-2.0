@@ -69,11 +69,11 @@ const VideoCard = ({ video, index }: { video: any, index: number }) => {
           {isIntersecting && (
             <video
               ref={videoRef}
-              src={`${video.src}#t=0.5`}
+              src={video.src}
               loop
               muted={false}
               playsInline
-              preload="metadata"
+              preload="none"
               className="absolute inset-0 w-full h-full object-cover"
             />
           )}

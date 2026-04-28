@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const btsImageNames = [
   "Bartosz skonhedsklinik.webp",
@@ -100,14 +101,15 @@ const BehindTheScenes = () => {
           {[...btsImages, ...btsImages].map((img, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-48 sm:w-56 lg:w-64 aspect-[3/4] rounded-2xl overflow-hidden border border-border/40 shadow-md bg-accent/20"
+              className="relative flex-shrink-0 w-48 sm:w-56 lg:w-64 aspect-[3/4] rounded-2xl overflow-hidden border border-border/40 shadow-md bg-accent/20"
             >
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 256px"
+                className="object-cover"
                 loading="lazy"
-                decoding="async"
               />
             </div>
           ))}

@@ -8,8 +8,10 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import { ArrowRight } from "lucide-react";
-import TeamSection from "@/components/home/TeamSection";
-import BehindTheScenes from "@/components/home/BehindTheScenes";
+import dynamic from 'next/dynamic';
+
+const TeamSection = dynamic(() => import("@/components/home/TeamSection"));
+const BehindTheScenes = dynamic(() => import("@/components/home/BehindTheScenes"));
 import { Highlight } from "@/components/Highlight";
 
 const values = [
