@@ -33,10 +33,10 @@ const CaseVideoCard = ({ src, color, platform, preload = "none" }: { src: string
     >
       <video
         ref={videoRef}
-        src={src}
+        src={`${src}#t=0.1`}
         loop
         playsInline
-        preload={preload}
+        preload={preload === "none" ? "metadata" : preload}
         className="absolute inset-0 w-full h-full object-cover"
       />
       {/* Dim overlay when paused */}

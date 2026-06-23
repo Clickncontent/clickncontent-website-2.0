@@ -70,9 +70,10 @@ const VideoCard = ({ src, industry }: { src: string; industry: string }) => {
     <div className="relative aspect-video overflow-hidden bg-black">
       <video
         ref={videoRef}
-        src={src}
+        src={`${src}#t=0.1`}
         loop
         playsInline
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div

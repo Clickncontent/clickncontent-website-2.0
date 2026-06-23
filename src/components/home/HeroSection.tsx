@@ -200,11 +200,11 @@ const HeroSection = () => {
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                 onClick={toggleSmallVideo}
               >
-                <video 
+                <video
                   ref={smallVideoRef}
-                  src={VIDEOS.nadiaNadim} 
-                  preload="none"
-                  loop playsInline 
+                  src={`${VIDEOS.nadiaNadim}#t=0.1`}
+                  preload="metadata"
+                  loop playsInline
                   className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />
                 

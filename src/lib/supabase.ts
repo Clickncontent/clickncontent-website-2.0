@@ -8,21 +8,25 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Cloudflare R2 public bucket URL
 const R2 = "https://pub-a2a0fc80d4724d84b0af62189bafe2c5.r2.dev";
 
-// Maps expected image names → actual filenames in R2 (uploaded with original casing/names)
+// Maps expected image names → local paths in /public (served by Next.js).
+// These images live in the repo under public/ and are not all present in R2,
+// so we serve them locally to avoid broken images.
 const IMAGE_MAP: Record<string, string> = {
-  "dsc01262.jpg":         "DSC01262.JPG",
-  "lumant.webp":          "Lumant.webp",
-  "skonhedsklinik.png":   "Skonhedsklinik.png",
-  "dressforsuccess.jpg":  "Dressforsuccess.JPG",
-  "nadim-aesthetics.jpeg":"Nadim Aestethics.jpeg",
-  "hejslet-logo.png":     "hejslet-logo.png",
-  "hejslet-photo.png":    "hejslet-photo.png",
+  "dsc01262.jpg":         "/DSC01262.JPG",
+  "lumant.webp":          "/Lumant.webp",
+  "skonhedsklinik.png":   "/Skonhedsklinik.png",
+  "dressforsuccess.jpg":  "/Dressforsuccess.JPG",
+  "nadim-aesthetics.jpeg":"/Nadim%20Aestethics.jpeg",
+  "hejslet-logo.png":     "/cases/hejslet-logo.png",
+  "hejslet-photo.png":    "/cases/hejslet-photo.png",
 };
 
-/** Returns a public CDN URL for a file in Cloudflare R2. */
+/** Returns a URL for a media file. Images resolve to local /public paths; videos use Cloudflare R2. */
 export function getMediaUrl(bucket: "videos" | "images", filename: string): string {
-  const mapped = IMAGE_MAP[filename] ?? filename;
-  return `${R2}/${mapped}`;
+  if (bucket === "images") {
+    return IMAGE_MAP[filename] ?? `/${filename}`;
+  }
+  return `${R2}/${filename}`;
 }
 
 // Pre-built video URL map — using Cloudflare R2
