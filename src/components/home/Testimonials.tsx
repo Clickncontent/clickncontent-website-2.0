@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { VIDEOS } from "@/lib/supabase";
 
+// Toggle to show the text testimonial cards. Currently the entries below are
+// placeholders, so they are hidden on the live site. Set to true once real
+// testimonials replace the placeholder data — the design is kept ready.
+const SHOW_TEXT_TESTIMONIALS = false;
+
 const testimonials = [
   {
     quote: "ClicknContent har fuldstændig transformeret vores annoncering. Deres creatives leverer konsistent høj ROAS – det er vores bedste investering.",
@@ -75,6 +80,7 @@ const Testimonials = () => {
           ))}
         </div>
 
+        {SHOW_TEXT_TESTIMONIALS && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((t, i) => (
             <motion.div
@@ -113,6 +119,7 @@ const Testimonials = () => {
             </motion.div>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

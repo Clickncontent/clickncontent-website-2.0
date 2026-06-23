@@ -129,7 +129,7 @@ const cases = [
     color: "from-accent to-primary/20",
     imageColor: "from-accent/50 via-primary/20 to-accent/30",
     video: null,
-    image: "/ecohus-case.png",
+    image: "/ecohus-case.webp",
   },
   {
     client: "Dress for Success",

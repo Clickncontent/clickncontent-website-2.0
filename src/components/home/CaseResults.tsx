@@ -14,7 +14,7 @@ const cases = [
     slug: "ecohus",
     industry: "Bolig & Ejendom",
     description: "68x ROI med videoer og datadrevne Meta-kampagner",
-    imageUrl: "/ecohus-case.png",
+    imageUrl: "/ecohus-case.webp",
     image: "from-accent/60 via-primary/30 to-accent/20",
     metrics: [
       { icon: Target, value: "68x", label: "ROI" },
@@ -42,6 +42,7 @@ const cases = [
     description: "Højt engagement og markant stigning i kundehenvendelser via kreative videoer.",
     video: null,
     imageUrl: getMediaUrl("images", "dsc01262.jpg"),
+    imagePosition: "center 32%",
     image: "from-primary/20 via-accent to-foreground/5",
     metrics: [
       { icon: Video, value: "15", label: "Videoer" },
@@ -147,7 +148,7 @@ const CaseResults = () => {
                 <VideoCard src={c.video} industry={c.industry} />
               ) : c.imageUrl ? (
                 <div className="relative aspect-video overflow-hidden">
-                  <img src={c.imageUrl} alt={c.client} className="absolute inset-0 w-full h-full object-cover" />
+                  <img src={c.imageUrl} alt={c.client} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: (c as any).imagePosition ?? "center" }} />
                   <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/10 transition-colors duration-500" />
                   
                   <div className="absolute top-4 left-4">

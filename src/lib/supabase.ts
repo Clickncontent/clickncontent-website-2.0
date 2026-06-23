@@ -14,7 +14,7 @@ const R2 = "https://pub-a2a0fc80d4724d84b0af62189bafe2c5.r2.dev";
 const IMAGE_MAP: Record<string, string> = {
   "dsc01262.jpg":         "/DSC01262.JPG",
   "lumant.webp":          "/Lumant.webp",
-  "skonhedsklinik.png":   "/Skonhedsklinik.png",
+  "skonhedsklinik.png":   "/Skonhedsklinik.webp",
   "dressforsuccess.jpg":  "/Dressforsuccess.JPG",
   "nadim-aesthetics.jpeg":"/Nadim%20Aestethics.jpeg",
   "hejslet-logo.png":     "/cases/hejslet-logo.png",

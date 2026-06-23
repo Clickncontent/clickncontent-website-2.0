@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { CalendlyButton } from "@/components/CalendlyButton";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter as useNavigate } from 'next/navigation';
 ;
@@ -72,7 +73,7 @@ export default function Kontakt() {
       navigate.push("/besked-modtaget");
       
     } catch (error: any) {
-      alert(error.message || "Noget gik galt. Prøv igen eller ring til os.");
+      toast.error(error.message || "Noget gik galt. Prøv igen eller ring til os.");
     } finally {
       setIsSubmitting(false);
     }
