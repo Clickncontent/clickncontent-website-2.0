@@ -1,8 +1,20 @@
+"use client";
+
 import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  const pathname = usePathname();
+
+  // Conversion landing pages (e.g. Meta ad destinations) live under /lp/* and
+  // render bare — no global nav, footer or ambient chrome — so they fully
+  // control their own look. This does not affect any other route.
+  if (pathname?.startsWith("/lp")) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-background">
       {/* Universal Ambient Light Blur Orbs */}
