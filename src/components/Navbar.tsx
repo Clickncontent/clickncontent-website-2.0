@@ -13,7 +13,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { to: "/ydelser", label: "Vores ydelser" },
   { to: "/cases", label: "Cases" },
-  { to: "/priser", label: "Priser" },
   { to: "/kontakt", label: "Kontakt os" },
   { to: "/om-os", label: "Om os" },
 ];
