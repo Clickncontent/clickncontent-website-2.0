@@ -1,9 +1,6 @@
 "use client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
-import Link from 'next/link';
-;
-import { ArrowRight } from "lucide-react";
 
 type FAQItem = {
   question: string;
@@ -34,19 +31,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "Hvad koster det at arbejde med jer?",
-    answer: (
-      <>
-        Vi arbejder ikke med standardpakker – vi skræddersyer prisen ud fra jeres behov, ambitionsniveau og indholdstyper. Det sikrer, at du hverken betaler for lidt eller for meget – men præcis det, der skal til for at opnå resultater.
-        <br /><br />
-        Vil du have et hurtigt estimat med det samme?{" "}
-        <Link
-          href="/priser#prisberegner"
-          className="inline-flex items-center gap-1 text-primary font-semibold hover:underline underline-offset-2 transition-colors"
-        >
-          Prøv vores prisberegner <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </>
-    ),
+    answer: "Vi arbejder ikke med standardpakker – vi skræddersyer prisen ud fra jeres behov, ambitionsniveau og indholdstyper. Det sikrer, at du hverken betaler for lidt eller for meget – men præcis det, der skal til for at opnå resultater. Kontakt os for et hurtigt og uforpligtende estimat.",
   },
 ];
 
